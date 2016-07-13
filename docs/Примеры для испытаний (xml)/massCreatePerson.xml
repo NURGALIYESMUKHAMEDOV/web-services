@@ -1,0 +1,44 @@
+<personData>
+    <person>
+        <lastName>Фамилия</lastName>
+        <firstName>Имя</firstName>
+        <middleName>Отчество</middleName>
+        <roleId>4</roleId>
+        <birthDate>dd.mm.yyyy</birthDate>
+        <idNumber>Номер уд.документа</idNumber>
+        <idIssuer>Орган, выдавший документ</idIssuer>
+        <idIssueDate>dd.mm.yyyy</idIssueDate>
+        <iin>760601400209</iin>
+        <st>Область</st>
+        <l>Город</l>
+        <phone>Номер телефона</phone>
+        <mobile>Номер сотового телефона</mobile>
+        <email>name@host.com</email>
+        <address>Адрес</address>
+        <legalData>
+            <orgName>Название организации</orgName>
+            <certificate>Номер свидетельства о гос.регистрации</certificate>
+            <certificateIssuer>Орган, выдавший документ</certificateIssuer>
+            <certificateIssueDate>dd.mm.yyyy</certificateIssueDate>
+            <directorSirname>ФИО руководящего лица</directorSirname>
+            <directorPosition>Должность руководящего лица</directorPosition>
+            <noResident>true/false</noResident>
+            <country>Идентификатор страны</country>
+            <bin>100460000102</bin>
+            <vatin>Номер документа налогоплательщика</vatin>
+            <phone>Номер телефона</phone>
+            <address>Юридический адрес</address>
+            <joinNumber></joinNumber>
+        </legalData>
+        <noResident>true/false</noResident>
+        <citizenship>Идентификатор страны</citizenship>
+		<ip>true/false</ip>
+        <bik>БИК</bik>
+        <account>Расчетный счет</account>
+        <isCUser>true/false</isCUser>
+        <generatePass>Признак генерации логина/пароля</generatePass>
+        <requestCertEmail>Признак отправления уведомлений</requestCertEmail>
+    </person>
+    <login>Логин</login>
+    <password>Пароль</password>
+</personData >

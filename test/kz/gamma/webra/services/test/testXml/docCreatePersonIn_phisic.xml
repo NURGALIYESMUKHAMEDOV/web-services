@@ -1,0 +1,155 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<docCreatePersonIn dateTime="2001-12-17T09:30:47Z" xsi:schemaLocation="http://www.gamma.kz/webra/xsd pki_document.xsd"
+                   xmlns="http://www.gamma.kz/webra/xsd" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+    <person>
+        <lastName>
+            <generator name="pattern">
+                <param name="max">50</param>
+                <param name="min">1</param>
+                <param name="valid"><![CDATA[abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZАаБбВвГгДдЕеЁёЖжЗзИиЙйКкЛлМмНнОоПпРрСсТтУуФфХхЦцЧчШшЩщЪъЫыЬьЭэЮюЯяӘәҒғҚқҢңҰұҮүҺһІіӨө -]]></param>
+            </generator>
+        </lastName>
+        <firstName>
+            <generator name="pattern">
+                <param name="max">50</param>
+                <param name="min">1</param>
+                <param name="valid"><![CDATA[abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZАаБбВвГгДдЕеЁёЖжЗзИиЙйКкЛлМмНнОоПпРрСсТтУуФфХхЦцЧчШшЩщЪъЫыЬьЭэЮюЯяӘәҒғҚқҢңҰұҮүҺһІіӨө -]]></param>
+            </generator>
+        </firstName>
+        <middleName>
+            <generator name="pattern">
+                <param name="max">50</param>
+                <param name="min">1</param>
+                <param name="nullable">true</param>
+                <param name="valid"><![CDATA[abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZАаБбВвГгДдЕеЁёЖжЗзИиЙйКкЛлМмНнОоПпРрСсТтУуФфХхЦцЧчШшЩщЪъЫыЬьЭэЮюЯяӘәҒғҚқҢңҰұҮүҺһІіӨө -]]></param>
+            </generator>
+        </middleName>
+        <roleId>
+            <generator name="number">
+                <param name="max">4</param>
+                <param name="min">4</param>
+                <param name="all">true</param>
+                <param name="nullable">true</param>
+            </generator>
+        </roleId>
+        <birthDate>
+            <generator name="date">
+                <param name="max">1900-01-01</param>
+                <param name="min">1800-01-01</param>
+                <param name="nullable">true</param>
+            </generator>
+        </birthDate>
+        <idNumber>
+            <generator name="pattern">
+                <param name="max">64</param>
+                <param name="min">9</param>
+                <param name="valid"><![CDATA[0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ-]]></param>
+            </generator>
+        </idNumber>
+        <idIssuer>
+            <generator name="pattern">
+                <param name="max">255</param>
+                <param name="min">1</param>
+                <param name="all">true</param>
+            </generator>
+        </idIssuer>
+        <idIssueDate>
+            <generator name="date">
+                <param name="max">2000-01-01</param>
+                <param name="min">1900-01-01</param>
+            </generator>
+        </idIssueDate>
+        <numberType>
+            <generator name="enum">
+                <param name="enums">RNN,IIN</param>
+            </generator>
+        </numberType>
+        <number>
+            <generator name="pattern">
+                <param name="max">12</param>
+                <param name="min">12</param>
+                <param name="valid"><![CDATA[0123456789]]></param>
+            </generator>
+        </number>
+        <st>
+            <generator name="pattern">
+                <param name="max">255</param>
+                <param name="min">0</param>
+                <param name="nullable">true</param>
+                <param name="all">true</param>
+            </generator>
+        </st>
+        <l>
+            <generator name="pattern">
+                <param name="max">255</param>
+                <param name="min">0</param>
+                <param name="nullable">true</param>
+                <param name="all">true</param>
+            </generator>
+        </l>
+        <phone>
+            <generator name="pattern">
+                <param name="max">255</param>
+                <param name="min">0</param>
+                <param name="nullable">true</param>
+                <param name="valid"><![CDATA[0123456789()-+\.]]></param>
+            </generator>
+        </phone>
+        <mobile>
+            <generator name="pattern">
+                <param name="max">255</param>
+                <param name="min">0</param>
+                <param name="nullable">true</param>
+                <param name="valid"><![CDATA[0123456789()-+\.]]></param>
+            </generator>
+        </mobile>
+        <email>
+            <generator name="email">
+                <param name="nullable">true</param>
+            </generator>
+        </email>
+        <address>
+            <generator name="pattern">
+                <param name="max">255</param>
+                <param name="min">0</param>
+                <param name="nullable">true</param>
+                <param name="all">true</param>
+            </generator>
+        </address>             
+        <noResident>
+            <generator name="enum">
+                <param name="enums">false,true</param>
+            </generator>
+        </noResident>
+        <bik>
+            <generator name="pattern">
+                <param name="max">9</param>
+                <param name="min">9</param>
+                <param name="nullable">true</param>
+                <param name="valid"><![CDATA[0123456789]]></param>
+            </generator>
+        </bik>
+        <account>
+            <generator name="pattern">
+                <param name="max">12</param>
+                <param name="min">9</param>
+                <param name="nullable">true</param>
+                <param name="valid"><![CDATA[0123456789]]></param>
+            </generator>
+        </account>
+    </person>
+    <login>
+        <generator name="pattern">
+            <param name="max">30</param>
+            <param name="min">6</param>
+            <param name="valid"><![CDATA[abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789 ,«»№!"#$%&'()*+-./:;<=>?@[\]^_`{|}~]]></param>
+        </generator>
+    </login>
+    <password>
+        <generator name="pattern">
+            <param name="max">30</param>
+            <param name="min">6</param>
+            <param name="all">true</param>
+        </generator>
+    </password>
+</docCreatePersonIn>

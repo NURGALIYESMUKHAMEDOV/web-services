@@ -1,0 +1,973 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- edited with XMLSpy v2011 rel. 2 (http://www.altova.com) by noname (noname) -->
+<xsd:schema xmlns="http://www.gamma.kz/webra/xsd" xmlns:xsd="http://www.w3.org/2001/XMLSchema" targetNamespace="http://www.gamma.kz/webra/xsd" elementFormDefault="qualified" attributeFormDefault="unqualified">
+	<xsd:include schemaLocation="pki_type.xsd"/>
+	<xsd:annotation>
+		<xsd:documentation>Описание внутренных документов-сообщений для взаимодействия с Удостоверяющим центром</xsd:documentation>
+	</xsd:annotation>
+	<xsd:complexType name="PkiDocument">
+		<xsd:annotation>
+			<xsd:documentation>Abstract Document</xsd:documentation>
+		</xsd:annotation>
+		<xsd:attribute name="dateTime" type="xsd:dateTime">
+			<xsd:annotation>
+				<xsd:documentation>Время создания</xsd:documentation>
+			</xsd:annotation>
+		</xsd:attribute>
+	</xsd:complexType>
+	<xsd:element name="docGetOrganizationIn">
+		<xsd:annotation>
+			<xsd:documentation>Запрос данных об организации</xsd:documentation>
+		</xsd:annotation>
+		<xsd:complexType>
+			<xsd:complexContent>
+				<xsd:extension base="PkiDocument"/>
+			</xsd:complexContent>
+		</xsd:complexType>
+	</xsd:element>
+	<xsd:element name="docGetOrganizationOut">
+		<xsd:annotation>
+			<xsd:documentation>Ответ на запрос данных об организации</xsd:documentation>
+		</xsd:annotation>
+		<xsd:complexType>
+			<xsd:complexContent>
+				<xsd:extension base="PkiDocument">
+					<xsd:sequence>
+						<xsd:element name="organization" type="Organization">
+							<xsd:annotation>
+								<xsd:documentation>Организация</xsd:documentation>
+							</xsd:annotation>
+						</xsd:element>
+					</xsd:sequence>
+				</xsd:extension>
+			</xsd:complexContent>
+		</xsd:complexType>
+	</xsd:element>
+	<xsd:element name="docCreatePersonIn">
+		<xsd:annotation>
+			<xsd:documentation>Запрос регистрации субъекта в УЦ.</xsd:documentation>
+		</xsd:annotation>
+		<xsd:complexType>
+			<xsd:complexContent>
+				<xsd:extension base="PkiDocument">
+					<xsd:sequence>
+						<xsd:element name="person" type="Person">
+							<xsd:annotation>
+								<xsd:documentation>Пользователь</xsd:documentation>
+							</xsd:annotation>
+						</xsd:element>
+						<xsd:element name="login" type="Login" minOccurs="0">
+							<xsd:annotation>
+								<xsd:documentation>Логин</xsd:documentation>
+							</xsd:annotation>
+						</xsd:element>
+						<xsd:element name="password" type="Password" minOccurs="0">
+							<xsd:annotation>
+								<xsd:documentation>Пароль</xsd:documentation>
+							</xsd:annotation>
+						</xsd:element>
+					</xsd:sequence>
+				</xsd:extension>
+			</xsd:complexContent>
+		</xsd:complexType>
+	</xsd:element>
+	<xsd:element name="docCreatePersonOut">
+		<xsd:annotation>
+			<xsd:documentation>Ответ на запрос регистрации субъекта в УЦ.</xsd:documentation>
+		</xsd:annotation>
+		<xsd:complexType>
+			<xsd:complexContent>
+				<xsd:extension base="PkiDocument">
+					<xsd:sequence>
+						<xsd:element name="personId" type="uLong20TYPE">
+							<xsd:annotation>
+								<xsd:documentation>ID пользователя</xsd:documentation>
+							</xsd:annotation>
+						</xsd:element>
+						<xsd:element name="DN" type="string255TYPE">
+							<xsd:annotation>
+								<xsd:documentation>DN пользователя</xsd:documentation>
+							</xsd:annotation>
+						</xsd:element>
+					</xsd:sequence>
+				</xsd:extension>
+			</xsd:complexContent>
+		</xsd:complexType>
+	</xsd:element>
+	<xsd:element name="docGetRolesIn">
+		<xsd:annotation>
+			<xsd:documentation>Запрос списка ролей менеджера в УЦ.</xsd:documentation>
+		</xsd:annotation>
+		<xsd:complexType>
+			<xsd:complexContent>
+				<xsd:extension base="PkiDocument"/>
+			</xsd:complexContent>
+		</xsd:complexType>
+	</xsd:element>
+	<xsd:element name="docGetRolesOut">
+		<xsd:annotation>
+			<xsd:documentation>Ответ на запрос списка ролей менеджера в УЦ.</xsd:documentation>
+		</xsd:annotation>
+		<xsd:complexType>
+			<xsd:complexContent>
+				<xsd:extension base="PkiDocument">
+					<xsd:sequence>
+						<xsd:element name="roleList" type="Role" minOccurs="0" maxOccurs="unbounded">
+							<xsd:annotation>
+								<xsd:documentation>Список ролей</xsd:documentation>
+							</xsd:annotation>
+						</xsd:element>
+					</xsd:sequence>
+				</xsd:extension>
+			</xsd:complexContent>
+		</xsd:complexType>
+	</xsd:element>
+	<xsd:element name="docUpdatePersonIn">
+		<xsd:annotation>
+			<xsd:documentation>Запрос на обновление персональных данных субъекта в УЦ.</xsd:documentation>
+		</xsd:annotation>
+		<xsd:complexType>
+			<xsd:complexContent>
+				<xsd:extension base="PkiDocument">
+					<xsd:sequence>
+						<xsd:element name="personId" type="uLong20TYPE">
+							<xsd:annotation>
+								<xsd:documentation>ID пользователя</xsd:documentation>
+							</xsd:annotation>
+						</xsd:element>
+						<xsd:element name="person" type="Person">
+							<xsd:annotation>
+								<xsd:documentation>Пользователь</xsd:documentation>
+							</xsd:annotation>
+						</xsd:element>
+					</xsd:sequence>
+				</xsd:extension>
+			</xsd:complexContent>
+		</xsd:complexType>
+	</xsd:element>
+	<xsd:element name="docUpdatePersonOut">
+		<xsd:annotation>
+			<xsd:documentation>Ответ на запрос обновления персональных данных субъекта в УЦ.</xsd:documentation>
+		</xsd:annotation>
+		<xsd:complexType>
+			<xsd:complexContent>
+				<xsd:extension base="PkiDocument">
+					<xsd:sequence>
+						<xsd:element name="person" type="Person">
+							<xsd:annotation>
+								<xsd:documentation>Пользователь</xsd:documentation>
+							</xsd:annotation>
+						</xsd:element>
+					</xsd:sequence>
+				</xsd:extension>
+			</xsd:complexContent>
+		</xsd:complexType>
+	</xsd:element>
+    <xsd:element name="docUpdateCUserIn">
+		<xsd:annotation>
+			<xsd:documentation>Запрос на перегенерацию ID/pass для cmp пользователей.</xsd:documentation>
+		</xsd:annotation>
+		<xsd:complexType>
+			<xsd:complexContent>
+				<xsd:extension base="PkiDocument">
+					<xsd:sequence>
+						<xsd:element name="personId" type="uLong20TYPE">
+							<xsd:annotation>
+								<xsd:documentation>ID пользователя</xsd:documentation>
+							</xsd:annotation>
+						</xsd:element>
+
+                        <xsd:element name="isCUser" type="xsd:boolean" minOccurs="0">
+                            <xsd:annotation>
+                                <xsd:documentation>Признак CMP пользователя</xsd:documentation>
+                            </xsd:annotation>
+                        </xsd:element>
+					</xsd:sequence>
+				</xsd:extension>
+			</xsd:complexContent>
+		</xsd:complexType>
+	</xsd:element>
+    <xsd:element name="docUpdateCUserOut">
+        <xsd:annotation>
+            <xsd:documentation>Ответ на запрос перегенерации ID/pass для cmp пользователей.</xsd:documentation>
+        </xsd:annotation>
+        <xsd:complexType>
+            <xsd:complexContent>
+                <xsd:extension base="PkiDocument">
+                    <xsd:sequence>
+                        <xsd:element name="personId" type="uLong20TYPE">
+                            <xsd:annotation>
+                                <xsd:documentation>ID пользователя</xsd:documentation>
+                            </xsd:annotation>
+                        </xsd:element>
+                    </xsd:sequence>
+                </xsd:extension>
+            </xsd:complexContent>
+        </xsd:complexType>
+    </xsd:element>
+	<xsd:element name="docSetDNIn">
+		<xsd:annotation>
+			<xsd:documentation>Запрос на формирование DN.</xsd:documentation>
+		</xsd:annotation>
+		<xsd:complexType>
+			<xsd:complexContent>
+				<xsd:extension base="PkiDocument">
+					<xsd:sequence>
+						<xsd:element name="personId" type="uLong20TYPE">
+							<xsd:annotation>
+								<xsd:documentation>ID пользователя</xsd:documentation>
+							</xsd:annotation>
+						</xsd:element>
+						<xsd:element name="DN">
+							<xsd:annotation>
+								<xsd:documentation>DN</xsd:documentation>
+							</xsd:annotation>
+							<xsd:simpleType>
+								<xsd:restriction base="string255TYPE">
+									<xsd:pattern value="[ ,«»!$&amp;\(\)\*\-\.:&lt;=&gt;\?@\[\]\^_\{\|\}~ӨөӘәҒғҚқҢңҰұҮүҺһІіa-zA-Zа-яА-Я0-9]{1,255}"/>
+								</xsd:restriction>
+							</xsd:simpleType>
+						</xsd:element>
+					</xsd:sequence>
+				</xsd:extension>
+			</xsd:complexContent>
+		</xsd:complexType>
+	</xsd:element>
+	<xsd:element name="docSetDNOut">
+		<xsd:annotation>
+			<xsd:documentation>Ответ на запрос на формирование DN.</xsd:documentation>
+		</xsd:annotation>
+		<xsd:complexType>
+			<xsd:complexContent>
+				<xsd:extension base="PkiDocument">
+					<xsd:sequence>
+						<xsd:element name="dns" type="string255TYPE" minOccurs="0" maxOccurs="unbounded">
+							<xsd:annotation>
+								<xsd:documentation>Список DN</xsd:documentation>
+							</xsd:annotation>
+						</xsd:element>
+					</xsd:sequence>
+				</xsd:extension>
+			</xsd:complexContent>
+		</xsd:complexType>
+	</xsd:element>
+	<xsd:element name="docLoadPersonIn">
+		<xsd:annotation>
+			<xsd:documentation>Запрос персональных данных субъекта из УЦ.</xsd:documentation>
+		</xsd:annotation>
+		<xsd:complexType>
+			<xsd:complexContent>
+				<xsd:extension base="PkiDocument">
+					<xsd:sequence>
+						<xsd:element name="personId" type="uLong20TYPE">
+							<xsd:annotation>
+								<xsd:documentation>ID пользователя</xsd:documentation>
+							</xsd:annotation>
+						</xsd:element>
+					</xsd:sequence>
+				</xsd:extension>
+			</xsd:complexContent>
+		</xsd:complexType>
+	</xsd:element>
+	<xsd:element name="docLoadPersonOut">
+		<xsd:annotation>
+			<xsd:documentation>Ответ на запрос персональных данных субъекта из УЦ.</xsd:documentation>
+		</xsd:annotation>
+		<xsd:complexType>
+			<xsd:complexContent>
+				<xsd:extension base="PkiDocument">
+					<xsd:sequence>
+						<xsd:element name="person" type="Person">
+							<xsd:annotation>
+								<xsd:documentation>Пользователь</xsd:documentation>
+							</xsd:annotation>
+						</xsd:element>
+						<xsd:element name="dns" type="string255TYPE" minOccurs="0" maxOccurs="unbounded">
+							<xsd:annotation>
+								<xsd:documentation>Список DN</xsd:documentation>
+							</xsd:annotation>
+						</xsd:element>
+					</xsd:sequence>
+				</xsd:extension>
+			</xsd:complexContent>
+		</xsd:complexType>
+	</xsd:element>
+    <xsd:element name="docRemovePersonIn">
+        <xsd:annotation>
+            <xsd:documentation>Запрос удаления субъекта из УЦ.</xsd:documentation>
+        </xsd:annotation>
+        <xsd:complexType>
+            <xsd:complexContent>
+                <xsd:extension base="PkiDocument">
+                    <xsd:sequence>
+                        <xsd:element name="personId" type="uLong20TYPE">
+                            <xsd:annotation>
+                                <xsd:documentation>ID пользователя</xsd:documentation>
+                            </xsd:annotation>
+                        </xsd:element>
+                    </xsd:sequence>
+                </xsd:extension>
+            </xsd:complexContent>
+        </xsd:complexType>
+    </xsd:element>
+    <xsd:element name="docRemovePersonOut">
+        <xsd:annotation>
+            <xsd:documentation>Ответ на запрос удаления субъекта из УЦ.</xsd:documentation>
+        </xsd:annotation>
+        <xsd:complexType>
+            <xsd:complexContent>
+                <xsd:extension base="PkiDocument">
+                    <xsd:sequence>
+                        <xsd:element name="personId" type="uLong20TYPE">
+                            <xsd:annotation>
+                                <xsd:documentation>ID пользователя</xsd:documentation>
+                            </xsd:annotation>
+                        </xsd:element>
+                        <xsd:element name="personFIO" type="xsd:string">
+                            <xsd:annotation>
+                                <xsd:documentation>Ф.И.О. пользователя</xsd:documentation>
+                            </xsd:annotation>
+                        </xsd:element>
+                    </xsd:sequence>
+                </xsd:extension>
+            </xsd:complexContent>
+        </xsd:complexType>
+    </xsd:element>
+	<xsd:element name="docFindPersonIn">
+		<xsd:annotation>
+			<xsd:documentation>Запрос идентификатора субъекта по существующему сертификату.</xsd:documentation>
+		</xsd:annotation>
+		<xsd:complexType>
+			<xsd:complexContent>
+				<xsd:extension base="PkiDocument">
+					<xsd:choice>
+						<xsd:element name="DN" type="xsd:string">
+							<xsd:annotation>
+								<xsd:documentation>DN сертификата (пользователя)</xsd:documentation>
+							</xsd:annotation>
+						</xsd:element>
+						<xsd:element name="login" type="xsd:string">
+							<xsd:annotation>
+								<xsd:documentation>Логин пользователя</xsd:documentation>
+							</xsd:annotation>
+						</xsd:element>
+					</xsd:choice>
+				</xsd:extension>
+			</xsd:complexContent>
+		</xsd:complexType>
+	</xsd:element>
+	<xsd:element name="docFindPersonOut">
+		<xsd:annotation>
+			<xsd:documentation>Ответ на запрос идентификатора субъекта по существующему сертификату.</xsd:documentation>
+		</xsd:annotation>
+		<xsd:complexType>
+			<xsd:complexContent>
+				<xsd:extension base="PkiDocument">
+					<xsd:sequence>
+						<xsd:element name="personId" type="uLong20TYPE">
+							<xsd:annotation>
+								<xsd:documentation>ID пользователя</xsd:documentation>
+							</xsd:annotation>
+						</xsd:element>
+					</xsd:sequence>
+				</xsd:extension>
+			</xsd:complexContent>
+		</xsd:complexType>
+	</xsd:element>
+	<xsd:element name="docChangePasswordIn">
+		<xsd:annotation>
+			<xsd:documentation>Запрос на изменение пароля пользователя</xsd:documentation>
+		</xsd:annotation>
+		<xsd:complexType>
+			<xsd:complexContent>
+				<xsd:extension base="PkiDocument">
+					<xsd:sequence>
+						<xsd:element name="password" type="Password">
+							<xsd:annotation>
+								<xsd:documentation>Пароль</xsd:documentation>
+							</xsd:annotation>
+						</xsd:element>
+						<xsd:element name="personId" type="uLong20TYPE" minOccurs="0">
+							<xsd:annotation>
+								<xsd:documentation>ID пользователя</xsd:documentation>
+							</xsd:annotation>
+						</xsd:element>
+					</xsd:sequence>
+				</xsd:extension>
+			</xsd:complexContent>
+		</xsd:complexType>
+	</xsd:element>
+	<xsd:element name="docChangePasswordOut">
+		<xsd:annotation>
+			<xsd:documentation>Ответ на запрос идентификатора субъекта по существующему сертификату.</xsd:documentation>
+		</xsd:annotation>
+		<xsd:complexType>
+			<xsd:complexContent>
+				<xsd:extension base="PkiDocument"/>
+			</xsd:complexContent>
+		</xsd:complexType>
+	</xsd:element>
+	<xsd:element name="docTariffListIn">
+		<xsd:annotation>
+			<xsd:documentation>Запрос справочника тарифов.</xsd:documentation>
+		</xsd:annotation>
+		<xsd:complexType>
+			<xsd:complexContent>
+				<xsd:extension base="PkiDocument"/>
+			</xsd:complexContent>
+		</xsd:complexType>
+	</xsd:element>
+	<xsd:element name="docTariffListOut">
+		<xsd:annotation>
+			<xsd:documentation>Ответ на запрос справочника тарифов.</xsd:documentation>
+		</xsd:annotation>
+		<xsd:complexType>
+			<xsd:complexContent>
+				<xsd:extension base="PkiDocument">
+					<xsd:sequence>
+						<xsd:element name="tariffList" type="Tariff" minOccurs="0" maxOccurs="unbounded">
+							<xsd:annotation>
+								<xsd:documentation>Тариф</xsd:documentation>
+							</xsd:annotation>
+						</xsd:element>
+					</xsd:sequence>
+				</xsd:extension>
+			</xsd:complexContent>
+		</xsd:complexType>
+	</xsd:element>
+	<xsd:element name="docBankListIn">
+		<xsd:annotation>
+			<xsd:documentation>Запрос списка банков.</xsd:documentation>
+		</xsd:annotation>
+		<xsd:complexType>
+			<xsd:complexContent>
+				<xsd:extension base="PkiDocument">
+					<xsd:sequence>
+						<xsd:element name="name" type="string255TYPE" minOccurs="0">
+							<xsd:annotation>
+								<xsd:documentation>Фильтр для названия банка, поик выполняется по like name</xsd:documentation>
+							</xsd:annotation>
+						</xsd:element>
+						<xsd:element name="bik" type="string255TYPE" minOccurs="0">
+							<xsd:annotation>
+								<xsd:documentation>Фильтр для БИК банка, поик выполняется по like bik</xsd:documentation>
+							</xsd:annotation>
+						</xsd:element>
+					</xsd:sequence>
+				</xsd:extension>
+			</xsd:complexContent>
+		</xsd:complexType>
+	</xsd:element>
+	<xsd:element name="docBankListOut">
+		<xsd:annotation>
+			<xsd:documentation>Ответ на запрос списка банков.</xsd:documentation>
+		</xsd:annotation>
+		<xsd:complexType>
+			<xsd:complexContent>
+				<xsd:extension base="PkiDocument">
+					<xsd:sequence>
+						<xsd:element name="bankList" type="Bank" minOccurs="0" maxOccurs="unbounded">
+							<xsd:annotation>
+								<xsd:documentation>Список банков</xsd:documentation>
+							</xsd:annotation>
+						</xsd:element>
+					</xsd:sequence>
+				</xsd:extension>
+			</xsd:complexContent>
+		</xsd:complexType>
+	</xsd:element>
+    <xsd:element name="docPositionListIn">
+        <xsd:annotation>
+            <xsd:documentation>Запрос справочника должностей.</xsd:documentation>
+        </xsd:annotation>
+        <xsd:complexType>
+            <xsd:complexContent>
+                <xsd:extension base="PkiDocument"/>
+            </xsd:complexContent>
+        </xsd:complexType>
+    </xsd:element>
+    <xsd:element name="docPositionListOut">
+        <xsd:annotation>
+            <xsd:documentation>Ответ на запрос справочника должностей.</xsd:documentation>
+        </xsd:annotation>
+        <xsd:complexType>
+            <xsd:complexContent>
+                <xsd:extension base="PkiDocument">
+                    <xsd:sequence>
+                        <xsd:element name="positionList" type="Position" minOccurs="0" maxOccurs="unbounded">
+                            <xsd:annotation>
+                                <xsd:documentation>Должность</xsd:documentation>
+                            </xsd:annotation>
+                        </xsd:element>
+                    </xsd:sequence>
+                </xsd:extension>
+            </xsd:complexContent>
+        </xsd:complexType>
+    </xsd:element>
+    <xsd:element name="docIssuerListIn">
+        <xsd:annotation>
+            <xsd:documentation>Запрос справочника нормативно-правовых учреждений.</xsd:documentation>
+        </xsd:annotation>
+        <xsd:complexType>
+            <xsd:complexContent>
+                <xsd:extension base="PkiDocument"/>
+            </xsd:complexContent>
+        </xsd:complexType>
+    </xsd:element>
+    <xsd:element name="docIssuerListOut">
+        <xsd:annotation>
+            <xsd:documentation>Ответ на запрос справочника нормативно правовых учреждений.</xsd:documentation>
+        </xsd:annotation>
+        <xsd:complexType>
+            <xsd:complexContent>
+                <xsd:extension base="PkiDocument">
+                    <xsd:sequence>
+                        <xsd:element name="issuerList" type="Issuer" minOccurs="0" maxOccurs="unbounded">
+                            <xsd:annotation>
+                                <xsd:documentation>Нормативно-правовое учреждение</xsd:documentation>
+                            </xsd:annotation>
+                        </xsd:element>
+                    </xsd:sequence>
+                </xsd:extension>
+            </xsd:complexContent>
+        </xsd:complexType>
+    </xsd:element>
+    <xsd:element name="docCountryListIn">
+        <xsd:annotation>
+            <xsd:documentation>Запрос справочника стран.</xsd:documentation>
+        </xsd:annotation>
+        <xsd:complexType>
+            <xsd:complexContent>
+                <xsd:extension base="PkiDocument"/>
+            </xsd:complexContent>
+        </xsd:complexType>
+    </xsd:element>
+    <xsd:element name="docCountryListOut">
+        <xsd:annotation>
+            <xsd:documentation>Ответ на запрос справочника стран.</xsd:documentation>
+        </xsd:annotation>
+        <xsd:complexType>
+            <xsd:complexContent>
+                <xsd:extension base="PkiDocument">
+                    <xsd:sequence>
+                        <xsd:element name="countryList" type="Country" minOccurs="0" maxOccurs="unbounded">
+                            <xsd:annotation>
+                                <xsd:documentation>Страна</xsd:documentation>
+                            </xsd:annotation>
+                        </xsd:element>
+                    </xsd:sequence>
+                </xsd:extension>
+            </xsd:complexContent>
+        </xsd:complexType>
+    </xsd:element>
+    <xsd:element name="docRegionListIn">
+        <xsd:annotation>
+            <xsd:documentation>Запрос справочника областей.</xsd:documentation>
+        </xsd:annotation>
+        <xsd:complexType>
+            <xsd:complexContent>
+                <xsd:extension base="PkiDocument"/>
+            </xsd:complexContent>
+        </xsd:complexType>
+    </xsd:element>
+    <xsd:element name="docRegionListOut">
+        <xsd:annotation>
+            <xsd:documentation>Ответ на запрос справочника областей.</xsd:documentation>
+        </xsd:annotation>
+        <xsd:complexType>
+            <xsd:complexContent>
+                <xsd:extension base="PkiDocument">
+                    <xsd:sequence>
+                        <xsd:element name="regionList" type="Region" minOccurs="0" maxOccurs="unbounded">
+                            <xsd:annotation>
+                                <xsd:documentation>Область</xsd:documentation>
+                            </xsd:annotation>
+                        </xsd:element>
+                    </xsd:sequence>
+                </xsd:extension>
+            </xsd:complexContent>
+        </xsd:complexType>
+    </xsd:element>
+    <xsd:element name="docCityListIn">
+        <xsd:annotation>
+            <xsd:documentation>Запрос справочника городов.</xsd:documentation>
+        </xsd:annotation>
+        <xsd:complexType>
+            <xsd:complexContent>
+                <xsd:extension base="PkiDocument"/>
+            </xsd:complexContent>
+        </xsd:complexType>
+    </xsd:element>
+    <xsd:element name="docCityListOut">
+        <xsd:annotation>
+            <xsd:documentation>Ответ на запрос справочника городов.</xsd:documentation>
+        </xsd:annotation>
+        <xsd:complexType>
+            <xsd:complexContent>
+                <xsd:extension base="PkiDocument">
+                    <xsd:sequence>
+                        <xsd:element name="cityList" type="City" minOccurs="0" maxOccurs="unbounded">
+                            <xsd:annotation>
+                                <xsd:documentation>Город</xsd:documentation>
+                            </xsd:annotation>
+                        </xsd:element>
+                    </xsd:sequence>
+                </xsd:extension>
+            </xsd:complexContent>
+        </xsd:complexType>
+    </xsd:element>
+	<xsd:element name="docCreateOrderIn">
+		<xsd:annotation>
+			<xsd:documentation>Запрос на создание заказа в УЦ.</xsd:documentation>
+		</xsd:annotation>
+		<xsd:complexType>
+			<xsd:complexContent>
+				<xsd:extension base="PkiDocument">
+					<xsd:sequence>
+						<xsd:element name="clientId" type="uLong20TYPE">
+							<xsd:annotation>
+								<xsd:documentation>ID клиента</xsd:documentation>
+							</xsd:annotation>
+						</xsd:element>
+                        <xsd:element name="fxOrderDetails" type="OrderDetail" minOccurs="1" maxOccurs="unbounded">
+                            <xsd:annotation>
+                                <xsd:documentation>Детали заказа</xsd:documentation>
+                            </xsd:annotation>
+                        </xsd:element>
+					</xsd:sequence>
+				</xsd:extension>
+			</xsd:complexContent>
+		</xsd:complexType>
+	</xsd:element>
+	<xsd:element name="docCreateOrderOut">
+		<xsd:annotation>
+			<xsd:documentation>Ответ на запрос создания заказа в УЦ.</xsd:documentation>
+		</xsd:annotation>
+		<xsd:complexType>
+			<xsd:complexContent>
+				<xsd:extension base="PkiDocument">
+					<xsd:sequence>
+						<xsd:element name="order" type="Order">
+							<xsd:annotation>
+								<xsd:documentation>Заказ</xsd:documentation>
+							</xsd:annotation>
+						</xsd:element>
+					</xsd:sequence>
+				</xsd:extension>
+			</xsd:complexContent>
+		</xsd:complexType>
+	</xsd:element>
+	<xsd:element name="docConfirmOrderIn">
+		<xsd:annotation>
+			<xsd:documentation>Запрос на подтверждение заказа в УЦ</xsd:documentation>
+		</xsd:annotation>
+		<xsd:complexType>
+			<xsd:complexContent>
+				<xsd:extension base="PkiDocument">
+					<xsd:sequence>
+						<xsd:element name="orderId" type="uLong20TYPE">
+							<xsd:annotation>
+								<xsd:documentation>ID заказа</xsd:documentation>
+							</xsd:annotation>
+						</xsd:element>
+					</xsd:sequence>
+				</xsd:extension>
+			</xsd:complexContent>
+		</xsd:complexType>
+	</xsd:element>
+	<xsd:element name="docConfirmOrderOut">
+		<xsd:annotation>
+			<xsd:documentation>Ответ на запрос подтверждения заказа в УЦ.</xsd:documentation>
+		</xsd:annotation>
+		<xsd:complexType>
+			<xsd:complexContent>
+				<xsd:extension base="PkiDocument">
+					<xsd:sequence>
+						<xsd:element name="order" type="Order">
+							<xsd:annotation>
+								<xsd:documentation>Заказ</xsd:documentation>
+							</xsd:annotation>
+						</xsd:element>
+					</xsd:sequence>
+				</xsd:extension>
+			</xsd:complexContent>
+		</xsd:complexType>
+	</xsd:element>
+	<xsd:element name="docOrderListIn">
+		<xsd:annotation>
+			<xsd:documentation>Запрос списка заказов субъекта.</xsd:documentation>
+		</xsd:annotation>
+		<xsd:complexType>
+			<xsd:complexContent>
+				<xsd:extension base="PkiDocument">
+					<xsd:sequence>
+						<xsd:element name="personId" type="uLong20TYPE">
+							<xsd:annotation>
+								<xsd:documentation>ID пользователя</xsd:documentation>
+							</xsd:annotation>
+						</xsd:element>
+					</xsd:sequence>
+				</xsd:extension>
+			</xsd:complexContent>
+		</xsd:complexType>
+	</xsd:element>
+	<xsd:element name="docOrderListOut">
+		<xsd:annotation>
+			<xsd:documentation>Ответ на запрос списка заказов субъекта.</xsd:documentation>
+		</xsd:annotation>
+		<xsd:complexType>
+			<xsd:complexContent>
+				<xsd:extension base="PkiDocument">
+					<xsd:sequence>
+						<xsd:element name="orderList" type="Order" minOccurs="0" maxOccurs="unbounded">
+							<xsd:annotation>
+								<xsd:documentation>Список заказов</xsd:documentation>
+							</xsd:annotation>
+						</xsd:element>
+					</xsd:sequence>
+				</xsd:extension>
+			</xsd:complexContent>
+		</xsd:complexType>
+	</xsd:element>
+	<xsd:element name="docRequestListIn">
+		<xsd:annotation>
+			<xsd:documentation>Запрос списка запросов субъекта</xsd:documentation>
+		</xsd:annotation>
+		<xsd:complexType>
+			<xsd:complexContent>
+				<xsd:extension base="PkiDocument">
+					<xsd:sequence>
+						<xsd:element name="personId" type="uLong20TYPE">
+							<xsd:annotation>
+								<xsd:documentation>ID пользователя</xsd:documentation>
+							</xsd:annotation>
+						</xsd:element>
+					</xsd:sequence>
+				</xsd:extension>
+			</xsd:complexContent>
+		</xsd:complexType>
+	</xsd:element>
+	<xsd:element name="docRequestListOut">
+		<xsd:annotation>
+			<xsd:documentation>Ответ на запрос списка запросов субъекта</xsd:documentation>
+		</xsd:annotation>
+		<xsd:complexType>
+			<xsd:complexContent>
+				<xsd:extension base="PkiDocument">
+					<xsd:sequence>
+						<xsd:element name="requestList" type="Request" minOccurs="0" maxOccurs="unbounded">
+							<xsd:annotation>
+								<xsd:documentation>Список запросов</xsd:documentation>
+							</xsd:annotation>
+						</xsd:element>
+					</xsd:sequence>
+				</xsd:extension>
+			</xsd:complexContent>
+		</xsd:complexType>
+	</xsd:element>
+	<xsd:element name="docRequestCertIn">
+		<xsd:annotation>
+			<xsd:documentation>Запрос на выпуск сертификата.</xsd:documentation>
+		</xsd:annotation>
+		<xsd:complexType>
+			<xsd:complexContent>
+				<xsd:extension base="PkiDocument">
+					<xsd:sequence>
+						<xsd:element name="request" type="Request">
+							<xsd:annotation>
+								<xsd:documentation>Запрос</xsd:documentation>
+							</xsd:annotation>
+						</xsd:element>
+					</xsd:sequence>
+				</xsd:extension>
+			</xsd:complexContent>
+		</xsd:complexType>
+	</xsd:element>
+	<xsd:element name="docRequestCertOut">
+		<xsd:annotation>
+			<xsd:documentation>Ответ на запрос выпуска сертификата.</xsd:documentation>
+		</xsd:annotation>
+		<xsd:complexType>
+			<xsd:complexContent>
+				<xsd:extension base="PkiDocument">
+					<xsd:sequence>
+						<xsd:element name="request" type="Request">
+							<xsd:annotation>
+								<xsd:documentation>Запрос</xsd:documentation>
+							</xsd:annotation>
+						</xsd:element>
+					</xsd:sequence>
+				</xsd:extension>
+			</xsd:complexContent>
+		</xsd:complexType>
+	</xsd:element>
+	<xsd:element name="docRevokeCertIn">
+		<xsd:annotation>
+			<xsd:documentation>Запрос на отзыв сертификата.</xsd:documentation>
+		</xsd:annotation>
+		<xsd:complexType>
+			<xsd:complexContent>
+				<xsd:extension base="PkiDocument">
+					<xsd:sequence>
+						<xsd:element name="signedCMS" type="xsd:base64Binary">
+							<xsd:annotation>
+								<xsd:documentation>Подписанный запрос</xsd:documentation>
+							</xsd:annotation>
+						</xsd:element>
+						<xsd:element name="serialNumber" type="xsd:base64Binary">
+							<xsd:annotation>
+								<xsd:documentation>Серийный номер сертификата</xsd:documentation>
+							</xsd:annotation>
+						</xsd:element>
+					</xsd:sequence>
+				</xsd:extension>
+			</xsd:complexContent>
+		</xsd:complexType>
+	</xsd:element>
+	<xsd:element name="docRevokeCertOut">
+		<xsd:annotation>
+			<xsd:documentation>Ответ на запрос отзыва сертификата</xsd:documentation>
+		</xsd:annotation>
+		<xsd:complexType>
+			<xsd:complexContent>
+				<xsd:extension base="PkiDocument">
+					<xsd:sequence>
+						<xsd:element name="request" type="Request">
+							<xsd:annotation>
+								<xsd:documentation>Запрос</xsd:documentation>
+							</xsd:annotation>
+						</xsd:element>
+					</xsd:sequence>
+				</xsd:extension>
+			</xsd:complexContent>
+		</xsd:complexType>
+	</xsd:element>
+	<xsd:element name="docGetCertListIn">
+		<xsd:annotation>
+			<xsd:documentation>Запрос списка сертификатов субъекта.</xsd:documentation>
+		</xsd:annotation>
+		<xsd:complexType>
+			<xsd:complexContent>
+				<xsd:extension base="PkiDocument">
+					<xsd:sequence>
+						<xsd:element name="pesonId" type="uLong20TYPE">
+							<xsd:annotation>
+								<xsd:documentation>ID пользователя</xsd:documentation>
+							</xsd:annotation>
+						</xsd:element>
+					</xsd:sequence>
+				</xsd:extension>
+			</xsd:complexContent>
+		</xsd:complexType>
+	</xsd:element>
+	<xsd:element name="docGetCertListOut">
+		<xsd:annotation>
+			<xsd:documentation>Ответ на запрос списка сертификатов субъекта.</xsd:documentation>
+		</xsd:annotation>
+		<xsd:complexType>
+			<xsd:complexContent>
+				<xsd:extension base="PkiDocument">
+					<xsd:sequence>
+						<xsd:element name="certList" type="X.509" minOccurs="0" maxOccurs="unbounded">
+							<xsd:annotation>
+								<xsd:documentation>Список сертификатов</xsd:documentation>
+							</xsd:annotation>
+						</xsd:element>
+					</xsd:sequence>
+				</xsd:extension>
+			</xsd:complexContent>
+		</xsd:complexType>
+	</xsd:element>
+	<xsd:element name="docGetTumarIn">
+		<xsd:annotation>
+			<xsd:documentation>Запрос текущей версии ТУМАР-CSP.</xsd:documentation>
+		</xsd:annotation>
+		<xsd:complexType>
+			<xsd:complexContent>
+				<xsd:extension base="PkiDocument"/>
+			</xsd:complexContent>
+		</xsd:complexType>
+	</xsd:element>
+	<xsd:element name="docGetTumarOut">
+		<xsd:annotation>
+			<xsd:documentation>Ответ на запрос текущей версии ТУМАР-CSP.</xsd:documentation>
+		</xsd:annotation>
+		<xsd:complexType>
+			<xsd:complexContent>
+				<xsd:extension base="PkiDocument">
+					<xsd:sequence>
+						<xsd:element name="body" type="xsd:base64Binary">
+							<xsd:annotation>
+								<xsd:documentation>Тело архива</xsd:documentation>
+							</xsd:annotation>
+						</xsd:element>
+					</xsd:sequence>
+				</xsd:extension>
+			</xsd:complexContent>
+		</xsd:complexType>
+	</xsd:element>
+	<xsd:element name="docGetPersonListIn">
+		<xsd:annotation>
+			<xsd:documentation>Запрос списка пользователей своей организации</xsd:documentation>
+		</xsd:annotation>
+		<xsd:complexType>
+			<xsd:complexContent>
+				<xsd:extension base="PkiDocument"/>
+			</xsd:complexContent>
+		</xsd:complexType>
+	</xsd:element>
+	<xsd:element name="docGetPersonListOut">
+		<xsd:annotation>
+			<xsd:documentation>Ответ на запрос списка пользователей своей организации</xsd:documentation>
+		</xsd:annotation>
+		<xsd:complexType>
+			<xsd:complexContent>
+				<xsd:extension base="PkiDocument">
+					<xsd:sequence>
+						<xsd:element name="personList" type="uLong20TYPE" minOccurs="0" maxOccurs="unbounded">
+							<xsd:annotation>
+								<xsd:documentation>Список идентификаторов</xsd:documentation>
+							</xsd:annotation>
+						</xsd:element>
+					</xsd:sequence>
+				</xsd:extension>
+			</xsd:complexContent>
+		</xsd:complexType>
+	</xsd:element>
+	<xsd:element name="docGenerateSANListIn">
+		<xsd:annotation>
+			<xsd:documentation>Генерация SAN для субъекта из УЦ.</xsd:documentation>
+		</xsd:annotation>
+		<xsd:complexType>
+			<xsd:complexContent>
+				<xsd:extension base="PkiDocument">
+					<xsd:sequence>
+						<xsd:element name="personId" type="uLong20TYPE">
+							<xsd:annotation>
+								<xsd:documentation>ID пользователя</xsd:documentation>
+							</xsd:annotation>
+						</xsd:element>
+					</xsd:sequence>
+				</xsd:extension>
+			</xsd:complexContent>
+		</xsd:complexType>
+	</xsd:element>
+	<xsd:element name="docGenerateSANListOut">
+		<xsd:annotation>
+			<xsd:documentation>Список SN.</xsd:documentation>
+		</xsd:annotation>
+		<xsd:complexType>
+			<xsd:complexContent>
+				<xsd:extension base="PkiDocument">
+					<xsd:sequence>
+						<xsd:element name="sanList" type="string255TYPE" minOccurs="0" maxOccurs="unbounded">
+							<xsd:annotation>
+								<xsd:documentation>Список SAN</xsd:documentation>
+							</xsd:annotation>
+						</xsd:element>
+					</xsd:sequence>
+				</xsd:extension>
+			</xsd:complexContent>
+		</xsd:complexType>
+	</xsd:element>
+</xsd:schema>

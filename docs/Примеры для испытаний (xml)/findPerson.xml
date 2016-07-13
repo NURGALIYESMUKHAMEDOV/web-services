@@ -1,0 +1,4 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<docFindPersonIn xmlns="http://www.gamma.kz/webra/xsd">
+    <DN>C=KZ, O=Slytherin, OU=serviceLegalOrgp, CN=lastname firstnamei middlename, UID=RNN100000002042, E=test@test.com</DN>
+</docFindPersonIn>

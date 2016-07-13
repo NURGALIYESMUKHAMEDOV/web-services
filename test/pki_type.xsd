@@ -1,0 +1,1423 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- edited with XMLSpy v2011 rel. 2 (http://www.altova.com) by y_makulbek (gamma) -->
+<xsd:schema xmlns="http://www.gamma.kz/webra/xsd" xmlns:xsd="http://www.w3.org/2001/XMLSchema" targetNamespace="http://www.gamma.kz/webra/xsd" elementFormDefault="qualified" attributeFormDefault="unqualified" version="1.0">
+	<xsd:annotation>
+		<xsd:documentation>Модель данных для взаимодействия с Удостоверяющим центром</xsd:documentation>
+	</xsd:annotation>
+	<xsd:simpleType name="statusTYPE">
+		<xsd:annotation>
+			<xsd:documentation>тип для статуса ответа</xsd:documentation>
+		</xsd:annotation>
+		<xsd:restriction base="xsd:string">
+			<xsd:enumeration value="OK">
+				<xsd:annotation>
+					<xsd:documentation>Успешный результат выполнения</xsd:documentation>
+				</xsd:annotation>
+			</xsd:enumeration>
+			<xsd:enumeration value="ERROR">
+				<xsd:annotation>
+					<xsd:documentation>Ошибка выполнения</xsd:documentation>
+				</xsd:annotation>
+			</xsd:enumeration>
+		</xsd:restriction>
+	</xsd:simpleType>
+	<xsd:simpleType name="codeTYPE">
+		<xsd:annotation>
+			<xsd:documentation>тип для кода ошибок (добавить варианты)</xsd:documentation>
+		</xsd:annotation>
+		<xsd:restriction base="xsd:string">
+			<xsd:enumeration value="xsdValidationError">
+				<xsd:annotation>
+					<xsd:documentation>Ошибка валидации по XSD. При наличии неправильно сформированных xml сообщений.</xsd:documentation>
+				</xsd:annotation>
+			</xsd:enumeration>
+			<xsd:enumeration value="signError">
+				<xsd:annotation>
+					<xsd:documentation>Ошибка подписи. При ошибках криптографии и подписи.</xsd:documentation>
+				</xsd:annotation>
+			</xsd:enumeration>
+			<xsd:enumeration value="serverError">
+				<xsd:annotation>
+					<xsd:documentation>Ошибка сервера. При возникновении не предвиденных ошибок на сервере.</xsd:documentation>
+				</xsd:annotation>
+			</xsd:enumeration>
+			<xsd:enumeration value="uniqueError">
+				<xsd:annotation>
+					<xsd:documentation>Ошибка уникальности. Возникает при нарушени уникальности сущности в системе.</xsd:documentation>
+				</xsd:annotation>
+			</xsd:enumeration>
+			<xsd:enumeration value="entityNotFound">
+				<xsd:annotation>
+					<xsd:documentation>Отсутствие требуемой сущности. При отсутвии сущности в системе.</xsd:documentation>
+				</xsd:annotation>
+			</xsd:enumeration>
+			<xsd:enumeration value="payError">
+				<xsd:annotation>
+					<xsd:documentation>Ошибка, связанная с оплатой.</xsd:documentation>
+				</xsd:annotation>
+			</xsd:enumeration>
+			<xsd:enumeration value="incorrectDataError">
+				<xsd:annotation>
+					<xsd:documentation>Некорректные данные.</xsd:documentation>
+				</xsd:annotation>
+			</xsd:enumeration>
+			<xsd:enumeration value="commonError">
+				<xsd:annotation>
+					<xsd:documentation>Общие ошибки. Ошибки не подходящие ни под одну категорию.</xsd:documentation>
+				</xsd:annotation>
+			</xsd:enumeration>
+		</xsd:restriction>
+	</xsd:simpleType>
+	<xsd:simpleType name="algTYPE">
+		<xsd:annotation>
+			<xsd:documentation>тип для кода ошибок (добавить варианты)</xsd:documentation>
+		</xsd:annotation>
+		<xsd:restriction base="xsd:string">
+			<xsd:enumeration value="GOST">
+				<xsd:annotation>
+					<xsd:documentation>Ошибка валидации по XSD. При наличии неправильно сформированных xml сообщений.</xsd:documentation>
+				</xsd:annotation>
+			</xsd:enumeration>
+			<xsd:enumeration value="RSA">
+				<xsd:annotation>
+					<xsd:documentation>Ошибка подписи. При ошибках криптографии и подписи.</xsd:documentation>
+				</xsd:annotation>
+			</xsd:enumeration>
+		</xsd:restriction>
+	</xsd:simpleType>
+	<xsd:simpleType name="orderTYPE">
+		<xsd:annotation>
+			<xsd:documentation>тип для статуса заказа</xsd:documentation>
+		</xsd:annotation>
+		<xsd:restriction base="xsd:string">
+			<xsd:enumeration value="novel">
+				<xsd:annotation>
+					<xsd:documentation>Оформлен заказ</xsd:documentation>
+				</xsd:annotation>
+			</xsd:enumeration>
+			<xsd:enumeration value="invoiced">
+				<xsd:annotation>
+					<xsd:documentation>Сформирован счет</xsd:documentation>
+				</xsd:annotation>
+			</xsd:enumeration>
+			<xsd:enumeration value="confirmed">
+				<xsd:annotation>
+					<xsd:documentation>Подтвержден</xsd:documentation>
+				</xsd:annotation>
+			</xsd:enumeration>
+			<xsd:enumeration value="paymented">
+				<xsd:annotation>
+					<xsd:documentation>Оплачен по счету</xsd:documentation>
+				</xsd:annotation>
+			</xsd:enumeration>
+			<xsd:enumeration value="rejected">
+				<xsd:annotation>
+					<xsd:documentation>Отменен</xsd:documentation>
+				</xsd:annotation>
+			</xsd:enumeration>
+			<xsd:enumeration value="finished">
+				<xsd:annotation>
+					<xsd:documentation>Завершен</xsd:documentation>
+				</xsd:annotation>
+			</xsd:enumeration>
+			<xsd:enumeration value="accounted">
+				<xsd:annotation>
+					<xsd:documentation>Сформирован счет-фактура</xsd:documentation>
+				</xsd:annotation>
+			</xsd:enumeration>
+		</xsd:restriction>
+	</xsd:simpleType>
+	<xsd:simpleType name="requestTYPE">
+		<xsd:annotation>
+			<xsd:documentation>тип для запроса сертификата</xsd:documentation>
+		</xsd:annotation>
+		<xsd:restriction base="xsd:string">
+			<xsd:enumeration value="registration">
+				<xsd:annotation>
+					<xsd:documentation>Регистрация сертификата</xsd:documentation>
+				</xsd:annotation>
+			</xsd:enumeration>
+			<xsd:enumeration value="initialization"/>
+			<xsd:enumeration value="revocation">
+				<xsd:annotation>
+					<xsd:documentation>Отзыв сертификата</xsd:documentation>
+				</xsd:annotation>
+			</xsd:enumeration>
+		</xsd:restriction>
+	</xsd:simpleType>
+	<xsd:simpleType name="userTYPE">
+		<xsd:annotation>
+			<xsd:documentation>тип для запроса сертификата</xsd:documentation>
+		</xsd:annotation>
+		<xsd:restriction base="xsd:string">
+			<xsd:enumeration value="adminType">
+				<xsd:annotation>
+					<xsd:documentation>Регистрация сертификата</xsd:documentation>
+				</xsd:annotation>
+			</xsd:enumeration>
+			<xsd:enumeration value="managerType"/>
+			<xsd:enumeration value="clientType">
+				<xsd:annotation>
+					<xsd:documentation>Отзыв сертификата</xsd:documentation>
+				</xsd:annotation>
+			</xsd:enumeration>
+		</xsd:restriction>
+	</xsd:simpleType>
+	<xsd:simpleType name="requestStatusTYPE">
+		<xsd:annotation>
+			<xsd:documentation>тип для статуса запроса</xsd:documentation>
+		</xsd:annotation>
+		<xsd:restriction base="xsd:string">
+			<xsd:enumeration value="novel">
+				<xsd:annotation>
+					<xsd:documentation>новый</xsd:documentation>
+				</xsd:annotation>
+			</xsd:enumeration>
+			<xsd:enumeration value="approved1">
+				<xsd:annotation>
+					<xsd:documentation>Подтвержден менеджером</xsd:documentation>
+				</xsd:annotation>
+			</xsd:enumeration>
+			<xsd:enumeration value="approved2">
+				<xsd:annotation>
+					<xsd:documentation>Подтвержден офицером безопасности</xsd:documentation>
+				</xsd:annotation>
+			</xsd:enumeration>
+			<xsd:enumeration value="rejected">
+				<xsd:annotation>
+					<xsd:documentation>отменен</xsd:documentation>
+				</xsd:annotation>
+			</xsd:enumeration>
+			<xsd:enumeration value="processed">
+				<xsd:annotation>
+					<xsd:documentation>обработан</xsd:documentation>
+				</xsd:annotation>
+			</xsd:enumeration>
+			<xsd:enumeration value="error">
+				<xsd:annotation>
+					<xsd:documentation>содержит ошибки</xsd:documentation>
+				</xsd:annotation>
+			</xsd:enumeration>
+		</xsd:restriction>
+	</xsd:simpleType>
+	<xsd:simpleType name="revokeReasonTYPE">
+		<xsd:annotation>
+			<xsd:documentation>тип для причины отзыва</xsd:documentation>
+		</xsd:annotation>
+		<xsd:restriction base="xsd:string">
+			<xsd:enumeration value="revRUnknown">
+				<xsd:annotation>
+					<xsd:documentation>Неизвестная причина</xsd:documentation>
+				</xsd:annotation>
+			</xsd:enumeration>
+			<xsd:enumeration value="revRKey">
+				<xsd:annotation>
+					<xsd:documentation>Компрометация ключа</xsd:documentation>
+				</xsd:annotation>
+			</xsd:enumeration>
+			<xsd:enumeration value="revRCA">
+				<xsd:annotation>
+					<xsd:documentation>Компрометация Центра Сертификации</xsd:documentation>
+				</xsd:annotation>
+			</xsd:enumeration>
+			<xsd:enumeration value="revRChangedInfo">
+				<xsd:annotation>
+					<xsd:documentation>Изменена информация о владельце сертификата</xsd:documentation>
+				</xsd:annotation>
+			</xsd:enumeration>
+			<xsd:enumeration value="revRChanged">
+				<xsd:annotation>
+					<xsd:documentation>Замена ключа</xsd:documentation>
+				</xsd:annotation>
+			</xsd:enumeration>
+			<xsd:enumeration value="revRStoped">
+				<xsd:annotation>
+					<xsd:documentation>Действие сертификата приостановлено</xsd:documentation>
+				</xsd:annotation>
+			</xsd:enumeration>
+			<xsd:enumeration value="revRHold">
+				<xsd:annotation>
+					<xsd:documentation>Возобновление действия сертификата</xsd:documentation>
+				</xsd:annotation>
+			</xsd:enumeration>
+			<xsd:enumeration value="revRRemoveFromCRL">
+				<xsd:annotation>
+					<xsd:documentation>Удален из списка отозванных</xsd:documentation>
+				</xsd:annotation>
+			</xsd:enumeration>
+		</xsd:restriction>
+	</xsd:simpleType>
+	<xsd:simpleType name="uLong20TYPE">
+		<xsd:annotation>
+			<xsd:documentation>тип беззнаковое целое, 20 разрядов</xsd:documentation>
+		</xsd:annotation>
+		<xsd:restriction base="xsd:unsignedLong">
+			<xsd:pattern value="[0-9]{0,20}">
+				<xsd:annotation>
+					<xsd:documentation>цифры 0-9, 0-20 разрядов</xsd:documentation>
+				</xsd:annotation>
+			</xsd:pattern>
+		</xsd:restriction>
+	</xsd:simpleType>
+	<xsd:simpleType name="string255TYPE">
+		<xsd:annotation>
+			<xsd:documentation>тип для строк, длинна 255</xsd:documentation>
+		</xsd:annotation>
+		<xsd:restriction base="xsd:string">
+			<xsd:minLength value="0"/>
+			<xsd:maxLength value="255"/>
+		</xsd:restriction>
+	</xsd:simpleType>
+	<xsd:simpleType name="Login">
+		<xsd:annotation>
+			<xsd:documentation>тип для логина, от 6 до 30 символов, латинские буквы, спец. символы</xsd:documentation>
+		</xsd:annotation>
+		<xsd:union>
+			<xsd:simpleType>
+				<xsd:restriction base="xsd:string">
+					<xsd:pattern value="[ «»№!&quot;#$%~&amp;&apos;\(\)\*\+,\-\./:;&lt;=&gt;\?@\[\]\^_`\{\|\}\\a-zA-Z0-9]{6,30}">
+						<xsd:annotation>
+							<xsd:documentation/>
+						</xsd:annotation>
+					</xsd:pattern>
+				</xsd:restriction>
+			</xsd:simpleType>
+			<xsd:simpleType>
+				<xsd:restriction base="xsd:string">
+					<xsd:enumeration value=""/>
+				</xsd:restriction>
+			</xsd:simpleType>
+		</xsd:union>
+	</xsd:simpleType>
+	<xsd:simpleType name="Password">
+		<xsd:annotation>
+			<xsd:documentation>тип для пароля, от 6 до 30 символов</xsd:documentation>
+		</xsd:annotation>
+		<xsd:union>
+			<xsd:simpleType>
+				<xsd:restriction base="xsd:string">
+					<xsd:minLength value="6"/>
+					<xsd:maxLength value="30"/>
+					<xsd:pattern value="[ «»№!&quot;#$%~&amp;&apos;\(\)\*\+,\-\./:;&lt;=&gt;\?@\[\]\^_`\{\|\}\\a-zа-яA-ZА-Я0-9]{6,30}"/>
+				</xsd:restriction>
+			</xsd:simpleType>
+			<xsd:simpleType>
+				<xsd:restriction base="xsd:string">
+					<xsd:enumeration value=""/>
+				</xsd:restriction>
+			</xsd:simpleType>
+		</xsd:union>
+	</xsd:simpleType>
+	<xsd:simpleType name="E-Mail">
+		<xsd:annotation>
+			<xsd:documentation>тип для e-mail</xsd:documentation>
+		</xsd:annotation>
+		<xsd:restriction base="xsd:string">
+			<xsd:pattern value="([\.a-zA-Z0-9%\+_\-])+@([a-zA-Z0-9_\-])+(([a-zA-Z0-9_\-])*\.([a-zA-Z0-9_\-])+)+"/>
+		</xsd:restriction>
+	</xsd:simpleType>
+	<xsd:simpleType name="Phone">
+		<xsd:annotation>
+			<xsd:documentation>тип для номера телефона</xsd:documentation>
+		</xsd:annotation>
+		<xsd:restriction base="xsd:string">
+			<xsd:pattern value="[ 0-9\-\+\.\(\)\\]{0,255}"/>
+		</xsd:restriction>
+	</xsd:simpleType>
+	<xsd:complexType name="X.509">
+		<xsd:annotation>
+			<xsd:documentation>X.509</xsd:documentation>
+		</xsd:annotation>
+		<xsd:sequence>
+			<xsd:element name="serialNumber" type="xsd:base64Binary">
+				<xsd:annotation>
+					<xsd:documentation>Серийный номер сертификата</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<xsd:element name="body" type="xsd:base64Binary">
+				<xsd:annotation>
+					<xsd:documentation>Тело сертификата</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+		</xsd:sequence>
+	</xsd:complexType>
+	<xsd:complexType name="Organization">
+		<xsd:annotation>
+			<xsd:documentation>Organization</xsd:documentation>
+		</xsd:annotation>
+		<xsd:sequence>
+			<xsd:element name="legalData" type="Legal">
+				<xsd:annotation>
+					<xsd:documentation>Данные юридического лица. Заполняется только в случае юридического лица</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<xsd:element name="isBlocked" type="xsd:boolean">
+				<xsd:annotation>
+					<xsd:documentation>Признак блокирования (deprecated, не используется в логике, всегда возвращается false)</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<xsd:element name="isCertLogin" type="xsd:boolean">
+				<xsd:annotation>
+					<xsd:documentation>Признак входа только по сертификату</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<xsd:element name="isSimpleOrder" type="xsd:boolean">
+				<xsd:annotation>
+					<xsd:documentation>Признак простого запроса</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<xsd:element name="isPreOrder" type="xsd:boolean">
+				<xsd:annotation>
+					<xsd:documentation>Признак пред оплаты</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<xsd:element name="isDefaultOrder" type="xsd:boolean">
+				<xsd:annotation>
+					<xsd:documentation>Признак заказа по умолчанию</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<xsd:element name="isApproveInit" type="xsd:boolean">
+				<xsd:annotation>
+					<xsd:documentation>Признак авто подтверждения менеджером на регистрацию</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<xsd:element name="isApproveOneReg" type="xsd:boolean">
+				<xsd:annotation>
+					<xsd:documentation>Признак авто подтверждения на выпуск менеджером</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<xsd:element name="isApproveTwoReg" type="xsd:boolean">
+				<xsd:annotation>
+					<xsd:documentation>Признак авто подтверждения на выпуск офицером</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<xsd:element name="isApproveOneRev" type="xsd:boolean">
+				<xsd:annotation>
+					<xsd:documentation>Признак авто подтверждения на отзыв менеджером</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<xsd:element name="isApproveTwoRev" type="xsd:boolean">
+				<xsd:annotation>
+					<xsd:documentation>Признак авто подтверждения на отзыв офицером</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<xsd:element name="isGetTumar" type="xsd:boolean">
+				<xsd:annotation>
+					<xsd:documentation>Признак скачивания Tumar</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<xsd:element name="isGetTumarJce" type="xsd:boolean">
+				<xsd:annotation>
+					<xsd:documentation>Признак скачивания Tumar, JCE</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<xsd:element name="defaultOrder" type="Order" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>Заказ по умолчанию</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<xsd:element name="createDate" type="xsd:date">
+				<xsd:annotation>
+					<xsd:documentation>Дата регистрации</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<xsd:element name="defaultUser" type="Person" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>Пользователь по умолчанию</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<xsd:element name="fxOrganizationsApproves" type="ApproveUserTypes" minOccurs="0" maxOccurs="unbounded">
+				<xsd:annotation>
+					<xsd:documentation>Детализация запроса</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+		</xsd:sequence>
+	</xsd:complexType>
+	<xsd:complexType name="ApproveUserTypes">
+		<xsd:annotation>
+			<xsd:documentation>Organization</xsd:documentation>
+		</xsd:annotation>
+		<xsd:sequence>
+			<xsd:element name="id" type="uLong20TYPE">
+				<xsd:annotation>
+					<xsd:documentation>ID</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<xsd:element name="name">
+				<xsd:annotation>
+					<xsd:documentation>Название</xsd:documentation>
+				</xsd:annotation>
+				<xsd:simpleType>
+					<xsd:restriction base="xsd:string">
+						<xsd:minLength value="1"/>
+						<xsd:maxLength value="255"/>
+						<xsd:pattern value="[^&quot;]{1,255}"/>
+					</xsd:restriction>
+				</xsd:simpleType>
+			</xsd:element>
+			<xsd:element name="approveLevel" type="xsd:short"/>
+			<xsd:element name="requestUserType" type="userTYPE"/>
+			<xsd:element name="confirmUserType" type="userTYPE"/>
+			<xsd:element name="requestType" type="requestTYPE"/>
+		</xsd:sequence>
+	</xsd:complexType>
+	<xsd:complexType name="Legal">
+		<xsd:annotation>
+			<xsd:documentation>Legal</xsd:documentation>
+		</xsd:annotation>
+		<xsd:sequence>
+			<xsd:element name="orgName">
+				<xsd:annotation>
+					<xsd:documentation>Название организации</xsd:documentation>
+				</xsd:annotation>
+				<xsd:simpleType>
+					<xsd:restriction base="xsd:string">
+						<xsd:minLength value="1"/>
+						<xsd:maxLength value="64"/>
+						<xsd:pattern value="[ «»№!&quot;#$%~&amp;&apos;\(\)\*\+,\-\./:;&lt;=&gt;\?@\[\]\^_`\{\|\}\\ӨөӘәҒғҚқҢңҰұҮүҺһІіa-zA-Zа-яА-Я0-9]{1,64}"/>
+					</xsd:restriction>
+				</xsd:simpleType>
+			</xsd:element>
+			<xsd:element name="certificate" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>Свидетельство гос.регистрации</xsd:documentation>
+				</xsd:annotation>
+				<xsd:simpleType>
+					<xsd:restriction base="xsd:string">
+						<xsd:minLength value="0"/>
+						<xsd:maxLength value="30"/>
+						<xsd:pattern value="[/№\.\- \(\)\\а-яА-ЯЁёa-zA-Z0-9]{0,30}"/>
+					</xsd:restriction>
+				</xsd:simpleType>
+			</xsd:element>
+
+			<xsd:element name="certificateIssuer" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>Орган выдавший свидетельство</xsd:documentation>
+				</xsd:annotation>
+				<xsd:simpleType>
+					<xsd:restriction base="xsd:string">
+						<xsd:minLength value="0"/>
+						<xsd:maxLength value="255"/>
+					</xsd:restriction>
+				</xsd:simpleType>
+
+			</xsd:element>
+			<xsd:element name="certificateIssueDate" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>Дата выдачи свидетельства</xsd:documentation>
+				</xsd:annotation>
+				<xsd:simpleType>
+					<xsd:restriction base="xsd:string">
+						<xsd:pattern value="|(((0[1-9]|[12]\d|3[01])\.(0[13578]|1[02])\.((19|[2-9]\d)\d{2}))|((0[1-9]|[12]\d|30)\.(0[13456789]|1[012])\.((19|[2-9]\d)\d{2}))|((0[1-9]|1\d|2[0-8])\.02\.((19|[2-9]\d)\d{2}))|(29\.02\.((1[6-9]|[2-9]\d)(0[48]|[2468][048]|[13579][26])|((16|[2468][048]|[3579][26])00))))"/>
+					</xsd:restriction>
+
+				</xsd:simpleType>
+			</xsd:element>
+			<xsd:element name="directorSirname">
+				<xsd:annotation>
+					<xsd:documentation>Фамилия первого руководителя</xsd:documentation>
+				</xsd:annotation>
+				<xsd:simpleType>
+					<xsd:restriction base="xsd:string">
+						<xsd:minLength value="1"/>
+						<xsd:maxLength value="50"/>
+						<xsd:pattern value="[\- \.ӨөӘәҒғҚқҢңҰұҮүҺһІіа-яА-ЯЁёa-zA-Z]{1,50}"/>
+					</xsd:restriction>
+				</xsd:simpleType>
+			</xsd:element>
+			<xsd:element name="directorPosition">
+				<xsd:annotation>
+					<xsd:documentation>Должность первого руководителя</xsd:documentation>
+				</xsd:annotation>
+				<xsd:simpleType>
+				<xsd:restriction base="xsd:string">
+					<xsd:minLength value="1"/>
+					<xsd:maxLength value="50"/>
+				</xsd:restriction>
+			</xsd:simpleType>
+			</xsd:element>
+			<xsd:element name="noResident" type="xsd:boolean">
+				<xsd:annotation>
+					<xsd:documentation>Признак нерезидента</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<xsd:element name="country" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>Страна Ю.Л.</xsd:documentation>
+				</xsd:annotation>
+				<xsd:simpleType>
+					<xsd:union>
+						<xsd:simpleType>
+							<xsd:restriction base="xsd:string">
+								<xsd:pattern value="[A-Z]{2}"/>
+							</xsd:restriction>
+						</xsd:simpleType>
+						<xsd:simpleType>
+							<xsd:restriction base="xsd:string">
+								<xsd:enumeration value=""/>
+							</xsd:restriction>
+						</xsd:simpleType>
+					</xsd:union>
+				</xsd:simpleType>
+			</xsd:element>
+				<xsd:element name="bin" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>БИН</xsd:documentation>
+				</xsd:annotation>
+				<xsd:simpleType>
+					<xsd:union>
+						<xsd:simpleType>
+							<xsd:restriction base="xsd:string">
+								<xsd:pattern value="[0-9]{12}"/>
+							</xsd:restriction>
+						</xsd:simpleType>
+						<xsd:simpleType>
+							<xsd:restriction base="xsd:string">
+								<xsd:enumeration value=""/>
+							</xsd:restriction>
+						</xsd:simpleType>
+					</xsd:union>
+				</xsd:simpleType>
+			</xsd:element>
+			<xsd:element name="vatin" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>Идентификационный номер VAT (НДС)</xsd:documentation>
+				</xsd:annotation>
+				<xsd:simpleType>
+					<xsd:restriction base="xsd:string">
+						<xsd:pattern value="[0-9a-zA-Z#\-\./]{0,20}"/>
+					</xsd:restriction>
+				</xsd:simpleType>
+			</xsd:element>
+			<xsd:element name="iin" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>ИИН для ИП</xsd:documentation>
+				</xsd:annotation>
+				<xsd:simpleType>
+					<xsd:union>
+						<xsd:simpleType>
+							<xsd:restriction base="xsd:string">
+								<xsd:pattern value="[0-9]{12}"/>
+							</xsd:restriction>
+						</xsd:simpleType>
+						<xsd:simpleType>
+							<xsd:restriction base="xsd:string">
+								<xsd:enumeration value=""/>
+							</xsd:restriction>
+						</xsd:simpleType>
+					</xsd:union>
+				</xsd:simpleType>
+			</xsd:element>
+			<xsd:element name="phone" type="Phone" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>Телефон</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+
+			<xsd:element name="address" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>Адрес</xsd:documentation>
+				</xsd:annotation>
+				<xsd:simpleType>
+					<xsd:restriction base="xsd:string">
+						<xsd:minLength value="1"/>
+						<xsd:maxLength value="255"/>
+
+					</xsd:restriction>
+				</xsd:simpleType>
+			</xsd:element>
+			<xsd:element name="joinNumber" type="string255TYPE" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>Номер заявления или Номер договора</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+		</xsd:sequence>
+	</xsd:complexType>
+	<xsd:complexType name="Person">
+		<xsd:annotation>
+			<xsd:documentation>Person</xsd:documentation>
+		</xsd:annotation>
+		<xsd:sequence>
+			<xsd:element name="lastName">
+				<xsd:annotation>
+					<xsd:documentation>Фамилия</xsd:documentation>
+				</xsd:annotation>
+				<xsd:simpleType>
+					<xsd:restriction base="xsd:string">
+						<xsd:minLength value="1"/>
+						<xsd:maxLength value="50"/>
+						<xsd:pattern value="[\- ӨөӘәҒғҚқҢңҰұҮүҺһІіа-яА-ЯЁёa-zA-Z]{1,50}"/>
+					</xsd:restriction>
+				</xsd:simpleType>
+			</xsd:element>
+			<xsd:element name="firstName">
+				<xsd:annotation>
+					<xsd:documentation>Имя</xsd:documentation>
+				</xsd:annotation>
+				<xsd:simpleType>
+					<xsd:restriction base="xsd:string">
+						<xsd:minLength value="1"/>
+						<xsd:maxLength value="50"/>
+						<xsd:pattern value="[\- ӨөӘәҒғҚқҢңҰұҮүҺһІіа-яА-ЯЁёa-zA-Z]{1,50}"/>
+					</xsd:restriction>
+				</xsd:simpleType>
+			</xsd:element>
+			<xsd:element name="middleName" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>Отчество</xsd:documentation>
+				</xsd:annotation>
+				<xsd:simpleType>
+					<xsd:restriction base="xsd:string">
+						<xsd:minLength value="0"/>
+						<xsd:maxLength value="50"/>
+						<xsd:pattern value="[\- ӨөӘәҒғҚқҢңҰұҮүҺһІіа-яА-ЯЁёa-zA-Z]{0,50}|"/>
+					</xsd:restriction>
+				</xsd:simpleType>
+			</xsd:element>
+			<xsd:element name="roleId" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>Роль</xsd:documentation>
+				</xsd:annotation>
+				<xsd:simpleType>
+					<xsd:union>
+						<xsd:simpleType>
+							<xsd:restriction base="uLong20TYPE"></xsd:restriction>
+						</xsd:simpleType>
+						<xsd:simpleType>
+							<xsd:restriction base="xsd:string">
+								<xsd:enumeration value=""/>
+							</xsd:restriction>
+						</xsd:simpleType>
+					</xsd:union>
+				</xsd:simpleType>
+			</xsd:element>
+			<xsd:element name="birthDate" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>Дата рождения</xsd:documentation>
+				</xsd:annotation>
+				<xsd:simpleType>
+					<xsd:restriction base="xsd:string">
+						<xsd:pattern value="|(((0[1-9]|[12]\d|3[01])\.(0[13578]|1[02])\.((19|[2-9]\d)\d{2}))|((0[1-9]|[12]\d|30)\.(0[13456789]|1[012])\.((19|[2-9]\d)\d{2}))|((0[1-9]|1\d|2[0-8])\.02\.((19|[2-9]\d)\d{2}))|(29\.02\.((1[6-9]|[2-9]\d)(0[48]|[2468][048]|[13579][26])|((16|[2468][048]|[3579][26])00))))"/>
+					</xsd:restriction>
+
+				</xsd:simpleType>
+			</xsd:element>
+			<xsd:element name="idNumber" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>Удостоверение</xsd:documentation>
+				</xsd:annotation>
+				<xsd:simpleType>
+					<xsd:restriction base="xsd:string">
+						<xsd:minLength value="0"/>
+						<xsd:maxLength value="61"/>
+						<xsd:pattern value="[A-Z0-9 «»!$&amp;\(\)\*\-\.:&lt;=&gt;\?@\[\]\^_\{\|\}~ ]{0,61}"/>
+					</xsd:restriction>
+				</xsd:simpleType>
+			</xsd:element>
+			<xsd:element name="idIssuer" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>Орган выдавший</xsd:documentation>
+				</xsd:annotation>
+				<xsd:simpleType>
+					<xsd:restriction base="xsd:string">
+						<xsd:minLength value="0"/>
+						<xsd:maxLength value="255"/>
+					</xsd:restriction>
+				</xsd:simpleType>
+			</xsd:element>
+			<xsd:element name="idIssueDate" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>Дата выдачи</xsd:documentation>
+				</xsd:annotation>
+				<xsd:simpleType>
+					<xsd:restriction base="xsd:string">
+						<xsd:pattern value="|(((0[1-9]|[12]\d|3[01])\.(0[13578]|1[02])\.((19|[2-9]\d)\d{2}))|((0[1-9]|[12]\d|30)\.(0[13456789]|1[012])\.((19|[2-9]\d)\d{2}))|((0[1-9]|1\d|2[0-8])\.02\.((19|[2-9]\d)\d{2}))|(29\.02\.((1[6-9]|[2-9]\d)(0[48]|[2468][048]|[13579][26])|((16|[2468][048]|[3579][26])00))))"/>
+					</xsd:restriction>
+
+				</xsd:simpleType>
+			</xsd:element>
+			<xsd:element name="iin" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>ИИН</xsd:documentation>
+				</xsd:annotation>
+				<xsd:simpleType>
+					<xsd:union>
+						<xsd:simpleType>
+							<xsd:restriction base="xsd:string">
+								<xsd:pattern value="[0-9]{12}"/>
+							</xsd:restriction>
+						</xsd:simpleType>
+						<xsd:simpleType>
+							<xsd:restriction base="xsd:string">
+								<xsd:enumeration value=""/>
+							</xsd:restriction>
+						</xsd:simpleType>
+					</xsd:union>
+				</xsd:simpleType>
+			</xsd:element>
+
+			<xsd:element name="st" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>Область</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<xsd:element name="l" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>Город</xsd:documentation>
+				</xsd:annotation>
+
+			</xsd:element>
+			<xsd:element name="phone" type="Phone" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>Телефон</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<xsd:element name="mobile" type="Phone" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>Сотовый</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<xsd:element name="email" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>Электронная почта</xsd:documentation>
+				</xsd:annotation>
+						<xsd:simpleType>
+							<xsd:restriction base="xsd:string">
+								<xsd:minLength value="0"/>
+								<xsd:maxLength value="255"/>
+								<!--<xsd:pattern value="|[a-z0-9!$'*+\-_]+(\.[a-z0-9!$'*+\-_]+)*@([a-z0-9]+(-+[a-z0-9]+)*\.)+([a-z]{2}|aero|arpa|biz|cat|com|coop|edu|gov|info|int|jobs|mil|mobi|museum|name|net|org|pro|travel)"/>-->
+							</xsd:restriction>
+						</xsd:simpleType>
+
+			</xsd:element>
+			<xsd:element name="address" type="string255TYPE" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>Адрес</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<xsd:element name="legalData" type="Legal" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>Данные юридического лица. Заполняются только для юридического лица</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<xsd:element name="noResident" type="xsd:boolean">
+				<xsd:annotation>
+					<xsd:documentation>Признак нерезидента</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<xsd:element name="citizenship" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>Гражданство</xsd:documentation>
+				</xsd:annotation>
+				<xsd:simpleType>
+					<xsd:union>
+						<xsd:simpleType>
+							<xsd:restriction base="xsd:string">
+								<xsd:pattern value="[A-Z]{2}"/>
+							</xsd:restriction>
+						</xsd:simpleType>
+						<xsd:simpleType>
+							<xsd:restriction base="xsd:string">
+								<xsd:enumeration value=""/>
+							</xsd:restriction>
+						</xsd:simpleType>
+					</xsd:union>
+				</xsd:simpleType>
+			</xsd:element>
+			<xsd:element name="ip" type="xsd:boolean">
+				<xsd:annotation>
+					<xsd:documentation>Признак ИП</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<xsd:element name="bik" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>БИК</xsd:documentation>
+				</xsd:annotation>
+				<xsd:simpleType>
+					<xsd:restriction base="xsd:string" />
+				</xsd:simpleType>
+			</xsd:element>
+			<xsd:element name="account" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>Расчетный счет</xsd:documentation>
+				</xsd:annotation>
+				<xsd:simpleType>
+					<xsd:restriction base="xsd:string" />
+				</xsd:simpleType>
+			</xsd:element>
+			<xsd:element name="uid" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>Uid</xsd:documentation>
+				</xsd:annotation>
+				<xsd:simpleType>
+					<xsd:restriction base="xsd:string">
+						<xsd:minLength value="1"/>
+						<xsd:maxLength value="61"/>
+						<xsd:pattern value="[A-Z0-9 «»!$&amp;\(\)\*\-\.:&lt;=&gt;\?@\[\]\^_\{\|\}~ ]{1,61}|"/>
+					</xsd:restriction>
+				</xsd:simpleType>
+			</xsd:element>
+			<xsd:element name="password" type="Password" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>Пароль</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<xsd:element name="isCUser" type="xsd:boolean">
+				<xsd:annotation>
+					<xsd:documentation>Признак CMP пользователя</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<xsd:element name="generatePass" type="xsd:boolean">
+				<xsd:annotation>
+					<xsd:documentation>Флаг для генерации логина и пароля</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<xsd:element name="requestCertEmail" type="xsd:boolean">
+				<xsd:annotation>
+					<xsd:documentation>Отправлять уведомления о необходимости выпуска сертификата.</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+		</xsd:sequence>
+	</xsd:complexType>
+	<xsd:complexType name="Role">
+		<xsd:annotation>
+			<xsd:documentation>Role</xsd:documentation>
+		</xsd:annotation>
+		<xsd:sequence>
+			<xsd:element name="id" type="uLong20TYPE">
+				<xsd:annotation>
+					<xsd:documentation>Идентификатор записи роли в таблице</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<xsd:element name="name" type="string255TYPE">
+				<xsd:annotation>
+					<xsd:documentation>Название роли</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<xsd:element name="description" type="string255TYPE">
+				<xsd:annotation>
+					<xsd:documentation>Описание роли</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+		</xsd:sequence>
+	</xsd:complexType>
+	<xsd:complexType name="Order">
+		<xsd:annotation>
+			<xsd:documentation>Order</xsd:documentation>
+		</xsd:annotation>
+		<xsd:sequence>
+			<xsd:element name="id" type="uLong20TYPE" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>Идентификатор записи заказа в таблице, необязательное поле</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<xsd:element name="clientId" type="uLong20TYPE" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>Идентификатор записи пользователя в таблице, необязательное поле</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<xsd:element name="invoiceNum" type="uLong20TYPE" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>Инвойс - номер счет фактуры</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<xsd:element name="bankId" type="uLong20TYPE" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>Идентификатор записи банка в таблице, необязательное поле</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<xsd:element name="account" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>Расчетный счет клиента</xsd:documentation>
+				</xsd:annotation>
+				<xsd:simpleType>
+					<xsd:restriction base="string255TYPE">
+						<xsd:pattern value="[0-9A-Z]{9,20}|"/>
+					</xsd:restriction>
+				</xsd:simpleType>
+			</xsd:element>
+			<xsd:element name="status" type="orderTYPE" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>Статус заказа</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<xsd:element name="payerNumberType" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>Тип номера покупателя (IIN, BIN)</xsd:documentation>
+				</xsd:annotation>
+				<xsd:simpleType>
+					<xsd:restriction base="xsd:string">
+						<xsd:enumeration value="IIN"/>
+						<xsd:enumeration value="BIN"/>
+					</xsd:restriction>
+				</xsd:simpleType>
+			</xsd:element>
+			<xsd:element name="payerNumber" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>ИИН или БИН покупателя</xsd:documentation>
+				</xsd:annotation>
+				<xsd:simpleType>
+					<xsd:restriction base="xsd:string">
+						<xsd:pattern value="\d{12}|"/>
+					</xsd:restriction>
+				</xsd:simpleType>
+			</xsd:element>
+			<xsd:element name="payerName" type="string255TYPE">
+				<xsd:annotation>
+					<xsd:documentation>Покупатель</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<xsd:element name="payerAddress" type="string255TYPE">
+				<xsd:annotation>
+					<xsd:documentation>Адрес покупателя</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<xsd:element name="fxOrderDetails" type="OrderDetail" minOccurs="0" maxOccurs="unbounded">
+				<xsd:annotation>
+					<xsd:documentation>Детализация заказа</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+		</xsd:sequence>
+	</xsd:complexType>
+	<xsd:complexType name="OrderDetail">
+		<xsd:annotation>
+			<xsd:documentation>OrderDetail</xsd:documentation>
+		</xsd:annotation>
+		<xsd:sequence>
+			<xsd:element name="id" type="uLong20TYPE" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>Идентификатор записи детализации заказа, необязательное поле</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<xsd:element name="dn" type="string255TYPE">
+				<xsd:annotation>
+					<xsd:documentation>DN имя</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<xsd:element name="tariffId" type="uLong20TYPE">
+				<xsd:annotation>
+					<xsd:documentation>Идентификатор записи тарифа в таблице</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<xsd:element name="claimCount" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>Заявленное количество</xsd:documentation>
+				</xsd:annotation>
+				<xsd:simpleType>
+					<xsd:restriction base="xsd:string">
+						<xsd:pattern value="|[0-9]*"/>
+					</xsd:restriction>
+				</xsd:simpleType>
+			</xsd:element>
+		</xsd:sequence>
+	</xsd:complexType>
+	<xsd:complexType name="Request">
+		<xsd:annotation>
+			<xsd:documentation>Request</xsd:documentation>
+		</xsd:annotation>
+		<xsd:sequence>
+			<xsd:element name="id" type="uLong20TYPE" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>Идентификатор записи запроса в таблице, необязательное поле</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<xsd:element name="DN" type="string255TYPE" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>DN</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<xsd:element name="tariffId" type="uLong20TYPE" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>Идентификатор записи тарифа в таблице, необязательное поле</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<xsd:element name="status" type="requestStatusTYPE" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>Статус запроса</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<xsd:element name="orderDetailId" type="uLong20TYPE" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>Идентификатор записи детализации заказа в таблице, необязательное поле</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<xsd:element name="type" type="requestTYPE" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>Тип запроса</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<xsd:element name="startDate" type="xsd:date" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>Дата создания запроса</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<xsd:element name="endDate" type="xsd:date" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>Дата завершения запроса</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<xsd:element name="cause" type="string255TYPE" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>Причина запроса</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<xsd:element name="comment" type="string255TYPE" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>Комментарий причины запроса</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<xsd:element name="fxRequestDetails" type="RequestDetail" maxOccurs="unbounded">
+				<xsd:annotation>
+					<xsd:documentation>Детализация запроса</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+		</xsd:sequence>
+	</xsd:complexType>
+	<xsd:complexType name="RequestDetail">
+		<xsd:annotation>
+			<xsd:documentation>RequestDetail</xsd:documentation>
+		</xsd:annotation>
+		<xsd:sequence>
+			<xsd:element name="id" type="uLong20TYPE" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>Идентификатор записи детализации запроса, необязательное поле</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<xsd:element name="tariffDetailId" type="uLong20TYPE" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>Идентификатор записи детализации тарифа в таблице, необязательное поле</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<xsd:element name="profile" type="string255TYPE" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>Профайл</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<xsd:element name="bodySigned" type="xsd:base64Binary" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>Подписанное значение(запрос)</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<xsd:element name="certBody" type="xsd:base64Binary" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>Тело сертификата</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+		</xsd:sequence>
+	</xsd:complexType>
+	<xsd:complexType name="Bank">
+		<xsd:annotation>
+			<xsd:documentation>Bank</xsd:documentation>
+		</xsd:annotation>
+		<xsd:sequence>
+			<xsd:element name="id" type="uLong20TYPE">
+				<xsd:annotation>
+					<xsd:documentation>Идентификатор записи банка в таблице</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<xsd:element name="name">
+				<xsd:annotation>
+					<xsd:documentation>Название банка</xsd:documentation>
+				</xsd:annotation>
+				<xsd:simpleType>
+					<xsd:restriction base="string255TYPE">
+						<xsd:pattern value="[\- &quot;ӨөӘәҒғҚқҢңҰұҮүҺһІіа-яА-ЯЁёa-zA-Z0-9]{1,255}"/>
+					</xsd:restriction>
+				</xsd:simpleType>
+			</xsd:element>
+			<xsd:element name="bik">
+				<xsd:annotation>
+					<xsd:documentation>БИК</xsd:documentation>
+				</xsd:annotation>
+				<xsd:simpleType>
+					<xsd:restriction base="string255TYPE">
+						<xsd:pattern value="[0-9A-Z]{8}"/>
+					</xsd:restriction>
+				</xsd:simpleType>
+			</xsd:element>
+			<xsd:element name="address" type="string255TYPE" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>Адрес банка</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<xsd:element name="description" type="string255TYPE" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>Описание банка</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<xsd:element name="branch" type="string255TYPE" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>Филиал</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+		</xsd:sequence>
+	</xsd:complexType>
+	<xsd:complexType name="Tariff">
+		<xsd:annotation>
+			<xsd:documentation>Tariff</xsd:documentation>
+		</xsd:annotation>
+		<xsd:sequence>
+			<xsd:element name="id" type="uLong20TYPE">
+				<xsd:annotation>
+					<xsd:documentation>Идентификатор записи тарифа в таблице</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<xsd:element name="name" type="string255TYPE">
+				<xsd:annotation>
+					<xsd:documentation>Название тарифа</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<xsd:element name="price" type="xsd:decimal">
+				<xsd:annotation>
+					<xsd:documentation>Стоимость с учетом НДС</xsd:documentation>
+				</xsd:annotation>
+
+			</xsd:element>
+			<xsd:element name="fxTariffDetails" type="TariffDetail" maxOccurs="unbounded">
+				<xsd:annotation>
+					<xsd:documentation>Детализация тарифа</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+		</xsd:sequence>
+	</xsd:complexType>
+	<xsd:complexType name="TariffDetail">
+		<xsd:annotation>
+			<xsd:documentation>TariffDetail</xsd:documentation>
+		</xsd:annotation>
+		<xsd:sequence>
+			<xsd:element name="id" type="uLong20TYPE">
+				<xsd:annotation>
+					<xsd:documentation>Идентификатор записи детализации тарифа в таблице</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<xsd:element name="certificate" type="string255TYPE" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>Шаблон</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<xsd:element name="certificateInit" type="string255TYPE" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>Шаблон для инициализации</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<xsd:element name="keySize" type="xsd:integer">
+				<xsd:annotation>
+					<xsd:documentation>Размер ключа</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<xsd:element name="isSaveKey" type="xsd:boolean">
+				<xsd:annotation>
+					<xsd:documentation>Признак экспортируемого ключа</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<xsd:element name="algType" type="algTYPE" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>Тип алгоритма</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+		</xsd:sequence>
+	</xsd:complexType>
+	<xsd:complexType name="Position">
+		<xsd:annotation>
+			<xsd:documentation>Должность</xsd:documentation>
+		</xsd:annotation>
+		<xsd:sequence>
+			<xsd:element name="name" type="string255TYPE">
+				<xsd:annotation>
+					<xsd:documentation>Название должности</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+		</xsd:sequence>
+	</xsd:complexType>
+	<xsd:complexType name="Issuer">
+		<xsd:annotation>
+			<xsd:documentation>Нормативно-правовое учреждение</xsd:documentation>
+		</xsd:annotation>
+		<xsd:sequence>
+			<xsd:element name="name" type="string255TYPE">
+				<xsd:annotation>
+					<xsd:documentation>Название нормативно-правового учреждения</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+		</xsd:sequence>
+	</xsd:complexType>
+	<xsd:complexType name="Country">
+		<xsd:annotation>
+			<xsd:documentation>Страна</xsd:documentation>
+		</xsd:annotation>
+		<xsd:sequence>
+			<xsd:element name="code">
+				<xsd:annotation>
+					<xsd:documentation>Код страны</xsd:documentation>
+				</xsd:annotation>
+				<xsd:simpleType>
+					<xsd:restriction base="xsd:string">
+						<xsd:pattern value="[A-Z]{2}"/>
+					</xsd:restriction>
+				</xsd:simpleType>
+			</xsd:element>
+			<xsd:element name="name" type="string255TYPE">
+				<xsd:annotation>
+					<xsd:documentation>Название страны</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+		</xsd:sequence>
+	</xsd:complexType>
+	<xsd:complexType name="Region">
+		<xsd:annotation>
+			<xsd:documentation>Область</xsd:documentation>
+		</xsd:annotation>
+		<xsd:sequence>
+			<xsd:element name="name" type="string255TYPE">
+				<xsd:annotation>
+					<xsd:documentation>Название области</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+		</xsd:sequence>
+	</xsd:complexType>
+	<xsd:complexType name="City">
+		<xsd:annotation>
+			<xsd:documentation>Город</xsd:documentation>
+		</xsd:annotation>
+		<xsd:sequence>
+			<xsd:element name="name" type="string255TYPE">
+				<xsd:annotation>
+					<xsd:documentation>Название города</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<xsd:element name="region" type="Region" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>Область</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+		</xsd:sequence>
+	</xsd:complexType>
+	<xsd:complexType name="PkiMessageRequest">
+		<xsd:annotation>
+			<xsd:documentation>Request</xsd:documentation>
+		</xsd:annotation>
+		<xsd:attribute name="service" type="xsd:string">
+			<xsd:annotation>
+				<xsd:documentation>Наименование операции</xsd:documentation>
+			</xsd:annotation>
+		</xsd:attribute>
+		<xsd:attribute name="requestDate" type="xsd:dateTime">
+			<xsd:annotation>
+				<xsd:documentation>Время запроса</xsd:documentation>
+			</xsd:annotation>
+		</xsd:attribute>
+		<xsd:attribute name="system" type="xsd:string">
+			<xsd:annotation>
+				<xsd:documentation>Идентификатор системы инициатора запроса</xsd:documentation>
+			</xsd:annotation>
+		</xsd:attribute>
+		<xsd:attribute name="seance" type="xsd:unsignedLong">
+			<xsd:annotation>
+				<xsd:documentation>Идентификатор запроса</xsd:documentation>
+			</xsd:annotation>
+		</xsd:attribute>
+		<xsd:attribute name="encoding" type="xsd:string">
+			<xsd:annotation>
+				<xsd:documentation>Кодировка сообщений, по умолчанию UTF-8</xsd:documentation>
+			</xsd:annotation>
+		</xsd:attribute>
+	</xsd:complexType>
+	<xsd:complexType name="PkiMessageResponse">
+		<xsd:annotation>
+			<xsd:documentation>Response</xsd:documentation>
+		</xsd:annotation>
+		<xsd:sequence>
+			<xsd:element name="error" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>Ошибка</xsd:documentation>
+				</xsd:annotation>
+				<xsd:complexType>
+					<xsd:sequence>
+						<xsd:element name="code" type="codeTYPE">
+							<xsd:annotation>
+								<xsd:documentation>Код ошибки</xsd:documentation>
+							</xsd:annotation>
+						</xsd:element>
+						<xsd:element name="message" type="xsd:string">
+							<xsd:annotation>
+								<xsd:documentation>Сообщение ошибки</xsd:documentation>
+							</xsd:annotation>
+						</xsd:element>
+						<xsd:element name="details" type="xsd:string" minOccurs="0">
+							<xsd:annotation>
+								<xsd:documentation>Детальное описание</xsd:documentation>
+							</xsd:annotation>
+						</xsd:element>
+					</xsd:sequence>
+				</xsd:complexType>
+			</xsd:element>
+			<xsd:element name="status" type="statusTYPE">
+				<xsd:annotation>
+					<xsd:documentation>Статус ответа</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+		</xsd:sequence>
+		<xsd:attribute name="service" type="xsd:string">
+			<xsd:annotation>
+				<xsd:documentation>Наименование операции</xsd:documentation>
+			</xsd:annotation>
+		</xsd:attribute>
+		<xsd:attribute name="responseDate" type="xsd:dateTime">
+			<xsd:annotation>
+				<xsd:documentation>Время ответа</xsd:documentation>
+			</xsd:annotation>
+		</xsd:attribute>
+		<xsd:attribute name="system" type="xsd:string">
+			<xsd:annotation>
+				<xsd:documentation>Идентификатор системы из запроса</xsd:documentation>
+			</xsd:annotation>
+		</xsd:attribute>
+		<xsd:attribute name="seance" type="xsd:unsignedLong">
+			<xsd:annotation>
+				<xsd:documentation>Идентификатор из запроса</xsd:documentation>
+			</xsd:annotation>
+		</xsd:attribute>
+		<xsd:attribute name="encoding" type="xsd:string">
+			<xsd:annotation>
+				<xsd:documentation>Кодировка сообщений, по умолчанию UTF-8</xsd:documentation>
+			</xsd:annotation>
+		</xsd:attribute>
+	</xsd:complexType>
+	<xsd:element name="requestPkiService">
+		<xsd:annotation>
+			<xsd:documentation>Сообщение запроса</xsd:documentation>
+		</xsd:annotation>
+		<xsd:complexType>
+			<xsd:complexContent>
+				<xsd:extension base="PkiMessageRequest">
+					<xsd:sequence>
+						<xsd:element name="pkcs7" type="xsd:base64Binary">
+							<xsd:annotation>
+								<xsd:documentation>Подписанные данные</xsd:documentation>
+							</xsd:annotation>
+						</xsd:element>
+					</xsd:sequence>
+				</xsd:extension>
+			</xsd:complexContent>
+		</xsd:complexType>
+	</xsd:element>
+	<xsd:element name="responsePkiService">
+		<xsd:annotation>
+			<xsd:documentation>Сообщение ответа</xsd:documentation>
+		</xsd:annotation>
+		<xsd:complexType>
+			<xsd:complexContent>
+				<xsd:extension base="PkiMessageResponse">
+					<xsd:sequence>
+						<xsd:element name="pkcs7" type="xsd:base64Binary" minOccurs="0">
+							<xsd:annotation>
+								<xsd:documentation>Подписанные данные</xsd:documentation>
+							</xsd:annotation>
+						</xsd:element>
+					</xsd:sequence>
+				</xsd:extension>
+			</xsd:complexContent>
+		</xsd:complexType>
+	</xsd:element>
+</xsd:schema>

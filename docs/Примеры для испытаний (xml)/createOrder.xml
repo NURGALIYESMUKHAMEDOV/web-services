@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<docCreateOrderIn xmlns="http://www.gamma.kz/webra/xsd">
+	<clientId>идентификатор покупателя/клиента</clientId>
+	<fxOrderDetails>
+		<dn>C=KZ, O=gamma, CN=Ivanov Petr Ivanovich, UID=BIN51555565, E=1email@sd.ru</dn>
+		<tariffId>идентификатор тарифа</tariffId>
+		<claimCount>количество заказываемых наборов РС</claimCount>
+	</fxOrderDetails>
+</docCreateOrderIn>

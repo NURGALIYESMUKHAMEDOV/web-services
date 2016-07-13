@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<docCreatePersonIn xsi:schemaLocation="http://www.gamma.kz/webra/xsd ../pki_document.xsd" xmlns="http://www.gamma.kz/webra/xsd" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+    <person>
+        <lastName>Фамилия</lastName>
+        <firstName>Имя</firstName>
+        <middleName>Отчество</middleName>
+        <roleId>4</roleId>
+        <birthDate>25.01.1988</birthDate>
+        <idNumber>016419193</idNumber>
+        <idIssuer>МЮ РК</idIssuer>
+        <idIssueDate>13.08.2003</idIssueDate>
+        <iin>760601400209</iin>
+        <st>Алматинская область</st>
+        <l>Алматы</l>
+        <phone>7272651234</phone>
+        <mobile>7007651234</mobile>
+        <email>name@host.com</email>
+        <address>ул.Пушкина</address>
+        <legalData>
+            <orgName>Название организации</orgName>
+            <certificate>0123456789012345678A</certificate>
+            <certificateIssuer>Орган, выдавший документ</certificateIssuer>
+            <certificateIssueDate>12.07.2010</certificateIssueDate>
+            <directorSirname>ФИО руководящего лица</directorSirname>
+            <directorPosition>Должность руководящего лица</directorPosition>
+            <noResident>false</noResident>
+            <country>KZ</country>
+            <bin>100460000102</bin>
+            <vatin/>
+            <iin>840103401099</iin>
+            <phone>7272345678</phone>
+            <address>ул.Колотушкина</address>
+        </legalData>
+        <noResident>false</noResident>
+        <citizenship>KZ</citizenship>
+        <ip>false</ip>
+        <bik>IRTYKZKA</bik>
+        <account>0123456789012345678A</account>
+        <isCUser>false</isCUser>
+        <generatePass>false</generatePass>
+        <requestCertEmail>false</requestCertEmail>
+    </person>
+    <login>servicelogin</login>
+    <password>1q2w#E$R</password>
+</docCreatePersonIn>

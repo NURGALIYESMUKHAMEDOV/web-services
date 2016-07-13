@@ -1,0 +1,17 @@
+.error {
+    color: red;
+    white-space: nowrap;
+    text-decoration: none;
+}
+
+.ok {
+    color: green;
+    white-space: nowrap;
+    text-decoration: none;    
+}
+
+.warning {
+    color: orange;
+    white-space: nowrap;
+    text-decoration: none;
+}

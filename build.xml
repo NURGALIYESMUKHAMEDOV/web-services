@@ -1,0 +1,93 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project name="web-services" basedir="." default="build">
+
+    <property file="../../tools/build/build.properties"/>
+
+    <target name="clean" description="clean classes">
+
+        <echo message="clean test data"/>
+        <delete>
+            <fileset dir="out" includes="*.xml"/>
+        </delete>
+        <delete>
+            <fileset dir="." includes="TEST*.txt"/>
+        </delete>
+
+        <echo message="clean classes"/>
+        <mkdir dir="${classes}"/>
+        <delete includeemptydirs="true">
+            <fileset dir="${classes}" includes="**"/>
+        </delete>
+    </target>
+
+    <target name="compile">
+        <mkdir dir="${classes}"/>
+        <javac destdir="${classes}" debug="on" encoding="UTF-8" nowarn="true" srcdir="src">
+            <classpath>
+                <fileset dir="${lib}">
+                    <include name="**/*.jar"/>
+                </fileset>
+            </classpath>
+        </javac>
+    </target>
+
+    <target name="copy_res">
+        <echo message="copy resources"/>
+        <copy todir="${classes}">
+            <fileset dir="src">
+                <include name="**/*"/>
+                <exclude name="**/*.java"/>
+            </fileset>
+        </copy>
+    </target>
+
+    <target name="test">
+        <junit printsummary="yes" fork="yes" haltonfailure="no">
+            <classpath location="${classes}">
+                <fileset dir="${lib}/">
+                    <include name="**/*.jar"/>
+                </fileset>
+            </classpath>
+            <formatter type="plain"/>
+            <test name="${classname}"/>
+        </junit>
+    </target>
+
+    <target name="exec_utility" depends="compile, copy_res">
+        <java fork="true" classname="kz.gamma.webra.services.client.test.GenerateEntities">
+            <classpath location="${classes}">
+                <fileset dir="${lib}/">
+                    <include name="**/*.jar"/>
+                </fileset>
+            </classpath>
+        </java>
+    </target>
+
+    <!--Генерация пакета kz.gamma.webra.services.common.entities-->
+    <target name="generateWsJaxB" description="generating web service client by XJC">
+        <exec executable="${java.home}/../bin/xjc">
+            <arg value="src/kz/gamma/webra/services/common/xsd/pki_document.xsd"/>
+            <arg value="-p"/>
+            <arg value="kz.gamma.webra.services.common.entities"/>
+            <arg value="-d"/>
+            <arg value="src"/>
+        </exec>
+    </target>
+
+    <!--Генерация пакета kz.gamma.webra.services.client.jaxws (должен быть доступ к wsdl)-->
+    <target name="generateWSClient" description="generating web service client by JbossWS">
+        <exec executable="${jboss.home}/bin/wsconsume.bat">
+            <arg value="-s"/>
+            <arg value="src"/>
+            <arg value="-o"/>
+            <arg value="out"/>
+            <arg value="-k"/>
+            <arg value="-p"/>
+            <arg value="kz.gamma.webra.services.client.jaxws"/>
+            <arg value="docs/Service.wsdl"/>
+        </exec>
+    </target>
+
+    <target name="build" depends="compile, copy_res, test" description="Сборка и запуск тестов"/>
+    
+</project>

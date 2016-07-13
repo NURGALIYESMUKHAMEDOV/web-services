@@ -1,0 +1,4 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<docRemovePersonIn xmlns="http://www.gamma.kz/webra/xsd">
+    <personId>идентификатор пользователя</personId>
+</docRemovePersonIn>

@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<docCreatePersonIn xmlns="http://www.gamma.kz/webra/xsd" dateTime="2001-12-17T09:30:47Z">
+    <person>
+        <lastName>Фамилия</lastName>
+        <firstName>Имя</firstName>
+        <middleName>Отчество</middleName>
+        <roleId>4</roleId>
+        <birthDate>dd.mm.yyyy</birthDate>
+        <idNumber>Номер документа, удостоверяющего личность</idNumber>
+        <idIssuer>Орган, выдавший документ</idIssuer>
+        <idIssueDate>dd.mm.yyyy</idIssueDate>
+        <iin>760601400209</iin>
+        <st>Область</st>
+        <l>Город</l>
+        <phone>Номер телефона</phone>
+        <mobile>Номер сотового телефона</mobile>
+        <email>name@host.com</email>
+        <address>Адрес</address>
+        <legalData>
+            <orgName>Название организации</orgName>
+            <certificate>Номер свидетельства гос.регистрации</certificate>
+            <certificateIssuer>Орган, выдавший документ</certificateIssuer>
+            <certificateIssueDate>dd.mm.yyyy</certificateIssueDate>
+            <directorSirname>ФИО руководящего лица</directorSirname>
+            <directorPosition>Должность руководящего лица</directorPosition>
+            <noResident>true/false</noResident>
+            <country>идентификатор страны юр.части: 2 лат.буквы</country>
+            <bin>100460000102</bin>
+            <vatin>Номер документа налогоплательщика для нерезидентов</vatin>
+            <iin>123456789000</iin>
+            <phone>Номер телефона</phone>
+            <address>Юридический адрес</address>
+        </legalData>
+        <noResident>true/false</noResident>
+        <citizenship>Идентификатор страны физ.части: 2 лат.буквы</citizenship>
+        <ip>true/false</ip>
+        <bik>БИК</bik>
+        <account>Расчетный счет</account>
+        <isCUser>Признак пользователя СМР</isCUser>
+        <generatePass>Признак автоматической генерации логина и пароля</generatePass>
+        <requestCertEmail>Признак отправки уведомления</requestCertEmail>
+    </person>
+    <login>Логин/идентификатор СМР</login>
+    <password>Пароль</password>
+</docCreatePersonIn>

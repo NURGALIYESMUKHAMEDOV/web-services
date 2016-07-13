@@ -1,0 +1,1133 @@
+<?xml version='1.0' encoding='UTF-8'?><wsdl:definitions name="WebraWS" targetNamespace="http://www.gamma.kz/webra/xsd" xmlns:ns1="http://schemas.xmlsoap.org/soap/http" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:tns="http://www.gamma.kz/webra/xsd" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+  <wsdl:types>
+<xs:schema elementFormDefault="unqualified" targetNamespace="http://www.gamma.kz/webra/xsd" version="1.0" xmlns:tns="http://www.gamma.kz/webra/xsd" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+<xs:element name="docGenerateSANListIn">
+<xs:complexType>
+<xs:complexContent>
+<xs:extension base="tns:PkiDocument">
+<xs:sequence>
+<xs:element form="qualified" name="personId" type="xs:integer" />
+</xs:sequence>
+</xs:extension>
+</xs:complexContent>
+</xs:complexType>
+</xs:element>
+<xs:element name="docGenerateSANListOut">
+<xs:complexType>
+<xs:complexContent>
+<xs:extension base="tns:PkiDocument">
+<xs:sequence>
+<xs:element form="qualified" maxOccurs="unbounded" minOccurs="0" name="sanList" nillable="true" type="xs:string" />
+</xs:sequence>
+</xs:extension>
+</xs:complexContent>
+</xs:complexType>
+</xs:element>
+<xs:element name="docBankListIn">
+<xs:complexType>
+<xs:complexContent>
+<xs:extension base="tns:PkiDocument">
+<xs:sequence>
+<xs:element form="qualified" minOccurs="0" name="name" type="xs:string" />
+<xs:element form="qualified" minOccurs="0" name="bik" type="xs:string" />
+</xs:sequence>
+</xs:extension>
+</xs:complexContent>
+</xs:complexType>
+</xs:element>
+<xs:element name="docBankListOut">
+<xs:complexType>
+<xs:complexContent>
+<xs:extension base="tns:PkiDocument">
+<xs:sequence>
+<xs:element form="qualified" maxOccurs="unbounded" minOccurs="0" name="bankList" nillable="true" type="tns:Bank" />
+</xs:sequence>
+</xs:extension>
+</xs:complexContent>
+</xs:complexType>
+</xs:element>
+<xs:element name="docChangePasswordIn">
+<xs:complexType>
+<xs:complexContent>
+<xs:extension base="tns:PkiDocument">
+<xs:sequence>
+<xs:element form="qualified" name="password" type="xs:string" />
+<xs:element form="qualified" minOccurs="0" name="personId" type="xs:integer" />
+</xs:sequence>
+</xs:extension>
+</xs:complexContent>
+</xs:complexType>
+</xs:element>
+<xs:element name="docChangePasswordOut">
+<xs:complexType>
+<xs:complexContent>
+<xs:extension base="tns:PkiDocument">
+<xs:sequence />
+</xs:extension>
+</xs:complexContent>
+</xs:complexType>
+</xs:element>
+<xs:element name="docCityListIn">
+<xs:complexType>
+<xs:complexContent>
+<xs:extension base="tns:PkiDocument">
+<xs:sequence />
+</xs:extension>
+</xs:complexContent>
+</xs:complexType>
+</xs:element>
+<xs:element name="docCityListOut">
+<xs:complexType>
+<xs:complexContent>
+<xs:extension base="tns:PkiDocument">
+<xs:sequence>
+<xs:element form="qualified" maxOccurs="unbounded" minOccurs="0" name="cityList" nillable="true" type="tns:City" />
+</xs:sequence>
+</xs:extension>
+</xs:complexContent>
+</xs:complexType>
+</xs:element>
+<xs:element name="docConfirmOrderIn">
+<xs:complexType>
+<xs:complexContent>
+<xs:extension base="tns:PkiDocument">
+<xs:sequence>
+<xs:element form="qualified" name="orderId" type="xs:integer" />
+</xs:sequence>
+</xs:extension>
+</xs:complexContent>
+</xs:complexType>
+</xs:element>
+<xs:element name="docConfirmOrderOut">
+<xs:complexType>
+<xs:complexContent>
+<xs:extension base="tns:PkiDocument">
+<xs:sequence>
+<xs:element form="qualified" name="order" type="tns:Order" />
+</xs:sequence>
+</xs:extension>
+</xs:complexContent>
+</xs:complexType>
+</xs:element>
+<xs:element name="docCountryListIn">
+<xs:complexType>
+<xs:complexContent>
+<xs:extension base="tns:PkiDocument">
+<xs:sequence />
+</xs:extension>
+</xs:complexContent>
+</xs:complexType>
+</xs:element>
+<xs:element name="docCountryListOut">
+<xs:complexType>
+<xs:complexContent>
+<xs:extension base="tns:PkiDocument">
+<xs:sequence>
+<xs:element form="qualified" maxOccurs="unbounded" minOccurs="0" name="countryList" nillable="true" type="tns:Country" />
+</xs:sequence>
+</xs:extension>
+</xs:complexContent>
+</xs:complexType>
+</xs:element>
+<xs:element name="docCreateOrderIn">
+<xs:complexType>
+<xs:complexContent>
+<xs:extension base="tns:PkiDocument">
+<xs:sequence>
+<xs:element form="qualified" name="clientId" type="xs:integer" />
+<xs:element form="qualified" maxOccurs="unbounded" minOccurs="1" name="fxOrderDetails" type="tns:OrderDetail" />
+</xs:sequence>
+</xs:extension>
+</xs:complexContent>
+</xs:complexType>
+</xs:element>
+<xs:element name="docCreateOrderOut">
+<xs:complexType>
+<xs:complexContent>
+<xs:extension base="tns:PkiDocument">
+<xs:sequence>
+<xs:element form="qualified" name="order" type="tns:Order" />
+</xs:sequence>
+</xs:extension>
+</xs:complexContent>
+</xs:complexType>
+</xs:element>
+<xs:element name="docCreatePersonIn">
+<xs:complexType>
+<xs:complexContent>
+<xs:extension base="tns:PkiDocument">
+<xs:sequence>
+<xs:element form="qualified" name="person" type="tns:Person" />
+<xs:element form="qualified" minOccurs="0" name="login" type="xs:string" />
+<xs:element form="qualified" minOccurs="0" name="password" type="xs:string" />
+</xs:sequence>
+</xs:extension>
+</xs:complexContent>
+</xs:complexType>
+</xs:element>
+<xs:element name="docCreatePersonOut">
+<xs:complexType>
+<xs:complexContent>
+<xs:extension base="tns:PkiDocument">
+<xs:sequence>
+<xs:element form="qualified" name="personId" type="xs:integer" />
+<xs:element form="qualified" name="DN" type="xs:string" />
+</xs:sequence>
+</xs:extension>
+</xs:complexContent>
+</xs:complexType>
+</xs:element>
+<xs:element name="docFindPersonIn">
+<xs:complexType>
+<xs:complexContent>
+<xs:extension base="tns:PkiDocument">
+<xs:sequence>
+<xs:element form="qualified" minOccurs="0" name="DN" type="xs:string" />
+<xs:element form="qualified" minOccurs="0" name="login" type="xs:string" />
+</xs:sequence>
+</xs:extension>
+</xs:complexContent>
+</xs:complexType>
+</xs:element>
+<xs:element name="docFindPersonOut">
+<xs:complexType>
+<xs:complexContent>
+<xs:extension base="tns:PkiDocument">
+<xs:sequence>
+<xs:element form="qualified" name="personId" type="xs:integer" />
+</xs:sequence>
+</xs:extension>
+</xs:complexContent>
+</xs:complexType>
+</xs:element>
+<xs:element name="docGetCertListIn">
+<xs:complexType>
+<xs:complexContent>
+<xs:extension base="tns:PkiDocument">
+<xs:sequence>
+<xs:element form="qualified" name="pesonId" type="xs:integer" />
+</xs:sequence>
+</xs:extension>
+</xs:complexContent>
+</xs:complexType>
+</xs:element>
+<xs:element name="docGetCertListOut">
+<xs:complexType>
+<xs:complexContent>
+<xs:extension base="tns:PkiDocument">
+<xs:sequence>
+<xs:element form="qualified" maxOccurs="unbounded" minOccurs="0" name="certList" nillable="true" type="tns:X.509" />
+</xs:sequence>
+</xs:extension>
+</xs:complexContent>
+</xs:complexType>
+</xs:element>
+<xs:element name="docGetOrganizationIn">
+<xs:complexType>
+<xs:complexContent>
+<xs:extension base="tns:PkiDocument">
+<xs:sequence />
+</xs:extension>
+</xs:complexContent>
+</xs:complexType>
+</xs:element>
+<xs:element name="docGetOrganizationOut">
+<xs:complexType>
+<xs:complexContent>
+<xs:extension base="tns:PkiDocument">
+<xs:sequence>
+<xs:element form="qualified" name="organization" type="tns:Organization" />
+</xs:sequence>
+</xs:extension>
+</xs:complexContent>
+</xs:complexType>
+</xs:element>
+<xs:element name="docGetPersonListIn">
+<xs:complexType>
+<xs:complexContent>
+<xs:extension base="tns:PkiDocument">
+<xs:sequence />
+</xs:extension>
+</xs:complexContent>
+</xs:complexType>
+</xs:element>
+<xs:element name="docGetPersonListOut">
+<xs:complexType>
+<xs:complexContent>
+<xs:extension base="tns:PkiDocument">
+<xs:sequence>
+<xs:element form="qualified" maxOccurs="unbounded" minOccurs="0" name="personList" nillable="true" type="xs:integer" />
+</xs:sequence>
+</xs:extension>
+</xs:complexContent>
+</xs:complexType>
+</xs:element>
+<xs:element name="docGetRolesIn">
+<xs:complexType>
+<xs:complexContent>
+<xs:extension base="tns:PkiDocument">
+<xs:sequence />
+</xs:extension>
+</xs:complexContent>
+</xs:complexType>
+</xs:element>
+<xs:element name="docGetRolesOut">
+<xs:complexType>
+<xs:complexContent>
+<xs:extension base="tns:PkiDocument">
+<xs:sequence>
+<xs:element form="qualified" maxOccurs="unbounded" minOccurs="0" name="roleList" nillable="true" type="tns:Role" />
+</xs:sequence>
+</xs:extension>
+</xs:complexContent>
+</xs:complexType>
+</xs:element>
+<xs:element name="docGetTumarIn">
+<xs:complexType>
+<xs:complexContent>
+<xs:extension base="tns:PkiDocument">
+<xs:sequence />
+</xs:extension>
+</xs:complexContent>
+</xs:complexType>
+</xs:element>
+<xs:element name="docGetTumarOut">
+<xs:complexType>
+<xs:complexContent>
+<xs:extension base="tns:PkiDocument">
+<xs:sequence>
+<xs:element form="qualified" name="body" type="xs:base64Binary" />
+</xs:sequence>
+</xs:extension>
+</xs:complexContent>
+</xs:complexType>
+</xs:element>
+<xs:element name="docIssuerListIn">
+<xs:complexType>
+<xs:complexContent>
+<xs:extension base="tns:PkiDocument">
+<xs:sequence />
+</xs:extension>
+</xs:complexContent>
+</xs:complexType>
+</xs:element>
+<xs:element name="docIssuerListOut">
+<xs:complexType>
+<xs:complexContent>
+<xs:extension base="tns:PkiDocument">
+<xs:sequence>
+<xs:element form="qualified" maxOccurs="unbounded" minOccurs="0" name="issuerList" nillable="true" type="tns:Issuer" />
+</xs:sequence>
+</xs:extension>
+</xs:complexContent>
+</xs:complexType>
+</xs:element>
+<xs:element name="docLoadPersonIn">
+<xs:complexType>
+<xs:complexContent>
+<xs:extension base="tns:PkiDocument">
+<xs:sequence>
+<xs:element form="qualified" name="personId" type="xs:integer" />
+</xs:sequence>
+</xs:extension>
+</xs:complexContent>
+</xs:complexType>
+</xs:element>
+<xs:element name="docLoadPersonOut">
+<xs:complexType>
+<xs:complexContent>
+<xs:extension base="tns:PkiDocument">
+<xs:sequence>
+<xs:element form="qualified" name="person" type="tns:Person" />
+<xs:element form="qualified" maxOccurs="unbounded" minOccurs="0" name="dns" nillable="true" type="xs:string" />
+</xs:sequence>
+</xs:extension>
+</xs:complexContent>
+</xs:complexType>
+</xs:element>
+<xs:element name="docOrderListIn">
+<xs:complexType>
+<xs:complexContent>
+<xs:extension base="tns:PkiDocument">
+<xs:sequence>
+<xs:element form="qualified" name="personId" type="xs:integer" />
+</xs:sequence>
+</xs:extension>
+</xs:complexContent>
+</xs:complexType>
+</xs:element>
+<xs:element name="docOrderListOut">
+<xs:complexType>
+<xs:complexContent>
+<xs:extension base="tns:PkiDocument">
+<xs:sequence>
+<xs:element form="qualified" maxOccurs="unbounded" minOccurs="0" name="orderList" nillable="true" type="tns:Order" />
+</xs:sequence>
+</xs:extension>
+</xs:complexContent>
+</xs:complexType>
+</xs:element>
+<xs:element name="docPositionListIn">
+<xs:complexType>
+<xs:complexContent>
+<xs:extension base="tns:PkiDocument">
+<xs:sequence />
+</xs:extension>
+</xs:complexContent>
+</xs:complexType>
+</xs:element>
+<xs:element name="docPositionListOut">
+<xs:complexType>
+<xs:complexContent>
+<xs:extension base="tns:PkiDocument">
+<xs:sequence>
+<xs:element form="qualified" maxOccurs="unbounded" minOccurs="0" name="positionList" nillable="true" type="tns:Position" />
+</xs:sequence>
+</xs:extension>
+</xs:complexContent>
+</xs:complexType>
+</xs:element>
+<xs:element name="docRegionListIn">
+<xs:complexType>
+<xs:complexContent>
+<xs:extension base="tns:PkiDocument">
+<xs:sequence />
+</xs:extension>
+</xs:complexContent>
+</xs:complexType>
+</xs:element>
+<xs:element name="docRegionListOut">
+<xs:complexType>
+<xs:complexContent>
+<xs:extension base="tns:PkiDocument">
+<xs:sequence>
+<xs:element form="qualified" maxOccurs="unbounded" minOccurs="0" name="regionList" nillable="true" type="tns:Region" />
+</xs:sequence>
+</xs:extension>
+</xs:complexContent>
+</xs:complexType>
+</xs:element>
+<xs:element name="docRemovePersonIn">
+<xs:complexType>
+<xs:complexContent>
+<xs:extension base="tns:PkiDocument">
+<xs:sequence>
+<xs:element form="qualified" name="personId" type="xs:integer" />
+</xs:sequence>
+</xs:extension>
+</xs:complexContent>
+</xs:complexType>
+</xs:element>
+<xs:element name="docRemovePersonOut">
+<xs:complexType>
+<xs:complexContent>
+<xs:extension base="tns:PkiDocument">
+<xs:sequence>
+<xs:element form="qualified" name="personId" type="xs:integer" />
+<xs:element form="qualified" name="personFIO" type="xs:string" />
+</xs:sequence>
+</xs:extension>
+</xs:complexContent>
+</xs:complexType>
+</xs:element>
+<xs:element name="docRequestCertIn">
+<xs:complexType>
+<xs:complexContent>
+<xs:extension base="tns:PkiDocument">
+<xs:sequence>
+<xs:element form="qualified" name="request" type="tns:Request" />
+</xs:sequence>
+</xs:extension>
+</xs:complexContent>
+</xs:complexType>
+</xs:element>
+<xs:element name="docRequestCertOut">
+<xs:complexType>
+<xs:complexContent>
+<xs:extension base="tns:PkiDocument">
+<xs:sequence>
+<xs:element form="qualified" name="request" type="tns:Request" />
+</xs:sequence>
+</xs:extension>
+</xs:complexContent>
+</xs:complexType>
+</xs:element>
+<xs:element name="docRequestListIn">
+<xs:complexType>
+<xs:complexContent>
+<xs:extension base="tns:PkiDocument">
+<xs:sequence>
+<xs:element form="qualified" name="personId" type="xs:integer" />
+</xs:sequence>
+</xs:extension>
+</xs:complexContent>
+</xs:complexType>
+</xs:element>
+<xs:element name="docRequestListOut">
+<xs:complexType>
+<xs:complexContent>
+<xs:extension base="tns:PkiDocument">
+<xs:sequence>
+<xs:element form="qualified" maxOccurs="unbounded" minOccurs="0" name="requestList" nillable="true" type="tns:Request" />
+</xs:sequence>
+</xs:extension>
+</xs:complexContent>
+</xs:complexType>
+</xs:element>
+<xs:element name="docRevokeCertIn">
+<xs:complexType>
+<xs:complexContent>
+<xs:extension base="tns:PkiDocument">
+<xs:sequence>
+<xs:element form="qualified" name="signedCMS" type="xs:base64Binary" />
+<xs:element form="qualified" name="serialNumber" type="xs:base64Binary" />
+</xs:sequence>
+</xs:extension>
+</xs:complexContent>
+</xs:complexType>
+</xs:element>
+<xs:element name="docRevokeCertOut">
+<xs:complexType>
+<xs:complexContent>
+<xs:extension base="tns:PkiDocument">
+<xs:sequence>
+<xs:element form="qualified" name="request" type="tns:Request" />
+</xs:sequence>
+</xs:extension>
+</xs:complexContent>
+</xs:complexType>
+</xs:element>
+<xs:element name="docSetDNIn">
+<xs:complexType>
+<xs:complexContent>
+<xs:extension base="tns:PkiDocument">
+<xs:sequence>
+<xs:element form="qualified" name="personId" type="xs:integer" />
+<xs:element form="qualified" name="DN" type="xs:string" />
+</xs:sequence>
+</xs:extension>
+</xs:complexContent>
+</xs:complexType>
+</xs:element>
+<xs:element name="docSetDNOut">
+<xs:complexType>
+<xs:complexContent>
+<xs:extension base="tns:PkiDocument">
+<xs:sequence>
+<xs:element form="qualified" maxOccurs="unbounded" minOccurs="0" name="dns" nillable="true" type="xs:string" />
+</xs:sequence>
+</xs:extension>
+</xs:complexContent>
+</xs:complexType>
+</xs:element>
+<xs:element name="docTariffListIn">
+<xs:complexType>
+<xs:complexContent>
+<xs:extension base="tns:PkiDocument">
+<xs:sequence />
+</xs:extension>
+</xs:complexContent>
+</xs:complexType>
+</xs:element>
+<xs:element name="docTariffListOut">
+<xs:complexType>
+<xs:complexContent>
+<xs:extension base="tns:PkiDocument">
+<xs:sequence>
+<xs:element form="qualified" maxOccurs="unbounded" minOccurs="0" name="tariffList" nillable="true" type="tns:Tariff" />
+</xs:sequence>
+</xs:extension>
+</xs:complexContent>
+</xs:complexType>
+</xs:element>
+<xs:element name="docUpdateCUserIn">
+<xs:complexType>
+<xs:complexContent>
+<xs:extension base="tns:PkiDocument">
+<xs:sequence>
+<xs:element form="qualified" name="personId" type="xs:integer" />
+<xs:element form="qualified" minOccurs="0" name="isCUser" type="xs:boolean" />
+<xs:element form="qualified" minOccurs="0" name="userId" type="xs:string" />
+</xs:sequence>
+</xs:extension>
+</xs:complexContent>
+</xs:complexType>
+</xs:element>
+<xs:element name="docUpdateCUserOut">
+<xs:complexType>
+<xs:complexContent>
+<xs:extension base="tns:PkiDocument">
+<xs:sequence>
+<xs:element form="qualified" name="personId" type="xs:integer" />
+</xs:sequence>
+</xs:extension>
+</xs:complexContent>
+</xs:complexType>
+</xs:element>
+<xs:element name="docUpdatePersonIn">
+<xs:complexType>
+<xs:complexContent>
+<xs:extension base="tns:PkiDocument">
+<xs:sequence>
+<xs:element form="qualified" name="personId" type="xs:integer" />
+<xs:element form="qualified" name="person" type="tns:Person" />
+</xs:sequence>
+</xs:extension>
+</xs:complexContent>
+</xs:complexType>
+</xs:element>
+<xs:element name="docUpdatePersonOut">
+<xs:complexType>
+<xs:complexContent>
+<xs:extension base="tns:PkiDocument">
+<xs:sequence>
+<xs:element form="qualified" name="person" type="tns:Person" />
+</xs:sequence>
+</xs:extension>
+</xs:complexContent>
+</xs:complexType>
+</xs:element>
+<xs:element name="echo" type="tns:echo" />
+<xs:element name="echoResponse" type="tns:echoResponse" />
+<xs:element name="getDocumentXSD" type="tns:getDocumentXSD" />
+<xs:element name="getDocumentXSDResponse" type="tns:getDocumentXSDResponse" />
+<xs:element name="getTumarAdditional" type="tns:getTumarAdditional" />
+<xs:element name="getTumarAdditionalResponse" type="tns:getTumarAdditionalResponse" />
+<xs:element name="getTypeXSD" type="tns:getTypeXSD" />
+<xs:element name="getTypeXSDResponse" type="tns:getTypeXSDResponse" />
+<xs:element name="getVersion" type="tns:getVersion" />
+<xs:element name="getVersionResponse" type="tns:getVersionResponse" />
+<xs:element name="pkiService" type="tns:pkiService" />
+<xs:element name="pkiServiceResponse" type="tns:pkiServiceResponse" />
+<xs:element name="requestPkiService">
+<xs:complexType>
+<xs:complexContent>
+<xs:extension base="tns:PkiMessageRequest">
+<xs:sequence>
+<xs:element form="qualified" name="pkcs7" type="xs:base64Binary" />
+</xs:sequence>
+</xs:extension>
+</xs:complexContent>
+</xs:complexType>
+</xs:element>
+<xs:element name="responsePkiService">
+<xs:complexType>
+<xs:complexContent>
+<xs:extension base="tns:PkiMessageResponse">
+<xs:sequence>
+<xs:element form="qualified" minOccurs="0" name="pkcs7" type="xs:base64Binary" />
+</xs:sequence>
+</xs:extension>
+</xs:complexContent>
+</xs:complexType>
+</xs:element>
+<xs:complexType name="echo">
+<xs:sequence>
+<xs:element minOccurs="0" name="testParam" type="xs:string" />
+</xs:sequence>
+</xs:complexType>
+<xs:complexType name="echoResponse">
+<xs:sequence>
+<xs:element minOccurs="0" name="return" type="xs:string" />
+</xs:sequence>
+</xs:complexType>
+<xs:complexType name="getDocumentXSD">
+<xs:sequence />
+</xs:complexType>
+<xs:complexType name="getDocumentXSDResponse">
+<xs:sequence>
+<xs:element minOccurs="0" name="return" type="xs:string" />
+</xs:sequence>
+</xs:complexType>
+<xs:complexType name="pkiService">
+<xs:sequence>
+<xs:element minOccurs="0" name="request">
+<xs:complexType>
+<xs:complexContent>
+<xs:extension base="tns:PkiMessageRequest">
+<xs:sequence>
+<xs:element form="qualified" name="pkcs7" type="xs:base64Binary" />
+</xs:sequence>
+</xs:extension>
+</xs:complexContent>
+</xs:complexType>
+</xs:element>
+</xs:sequence>
+</xs:complexType>
+<xs:complexType name="PkiMessageRequest">
+<xs:sequence />
+<xs:attribute name="service" type="xs:string" />
+<xs:attribute name="requestDate" type="xs:dateTime" />
+<xs:attribute name="system" type="xs:string" />
+<xs:attribute name="seance" type="xs:unsignedLong" />
+<xs:attribute name="encoding" type="xs:string" />
+</xs:complexType>
+<xs:complexType name="pkiServiceResponse">
+<xs:sequence>
+<xs:element minOccurs="0" name="return">
+<xs:complexType>
+<xs:complexContent>
+<xs:extension base="tns:PkiMessageResponse">
+<xs:sequence>
+<xs:element form="qualified" minOccurs="0" name="pkcs7" type="xs:base64Binary" />
+</xs:sequence>
+</xs:extension>
+</xs:complexContent>
+</xs:complexType>
+</xs:element>
+</xs:sequence>
+</xs:complexType>
+<xs:complexType name="PkiMessageResponse">
+<xs:sequence>
+<xs:element form="qualified" minOccurs="0" name="error">
+<xs:complexType>
+<xs:sequence>
+<xs:element form="qualified" name="code" type="tns:codeTYPE" />
+<xs:element form="qualified" name="message" type="xs:string" />
+<xs:element form="qualified" minOccurs="0" name="details" type="xs:string" />
+</xs:sequence>
+</xs:complexType>
+</xs:element>
+<xs:element form="qualified" name="status" type="tns:statusTYPE" />
+</xs:sequence>
+<xs:attribute name="service" type="xs:string" />
+<xs:attribute name="responseDate" type="xs:dateTime" />
+<xs:attribute name="system" type="xs:string" />
+<xs:attribute name="seance" type="xs:unsignedLong" />
+<xs:attribute name="encoding" type="xs:string" />
+</xs:complexType>
+<xs:complexType name="getTypeXSD">
+<xs:sequence />
+</xs:complexType>
+<xs:complexType name="getTypeXSDResponse">
+<xs:sequence>
+<xs:element minOccurs="0" name="return" type="xs:string" />
+</xs:sequence>
+</xs:complexType>
+<xs:complexType name="getTumarAdditional">
+<xs:sequence>
+<xs:element name="isManager" type="xs:boolean" />
+<xs:element name="isWithJCE" type="xs:boolean" />
+</xs:sequence>
+</xs:complexType>
+<xs:complexType name="getTumarAdditionalResponse">
+<xs:sequence>
+<xs:element minOccurs="0" name="return" type="xs:base64Binary" />
+</xs:sequence>
+</xs:complexType>
+<xs:complexType name="getVersion">
+<xs:sequence />
+</xs:complexType>
+<xs:complexType name="getVersionResponse">
+<xs:sequence>
+<xs:element maxOccurs="unbounded" minOccurs="0" name="return" type="xs:string" />
+</xs:sequence>
+</xs:complexType>
+<xs:complexType name="Request">
+<xs:sequence>
+<xs:element form="qualified" minOccurs="0" name="id" type="xs:integer" />
+<xs:element form="qualified" minOccurs="0" name="DN" type="xs:string" />
+<xs:element form="qualified" minOccurs="0" name="tariffId" type="xs:integer" />
+<xs:element form="qualified" minOccurs="0" name="status" type="tns:requestStatusTYPE" />
+<xs:element form="qualified" minOccurs="0" name="orderDetailId" type="xs:integer" />
+<xs:element form="qualified" minOccurs="0" name="type" type="tns:requestTYPE" />
+<xs:element form="qualified" minOccurs="0" name="startDate" type="xs:date" />
+<xs:element form="qualified" minOccurs="0" name="endDate" type="xs:date" />
+<xs:element form="qualified" minOccurs="0" name="cause" type="xs:string" />
+<xs:element form="qualified" minOccurs="0" name="comment" type="xs:string" />
+<xs:element form="qualified" maxOccurs="unbounded" name="fxRequestDetails" type="tns:RequestDetail" />
+</xs:sequence>
+</xs:complexType>
+<xs:complexType name="RequestDetail">
+<xs:sequence>
+<xs:element form="qualified" minOccurs="0" name="id" type="xs:integer" />
+<xs:element form="qualified" minOccurs="0" name="tariffDetailId" type="xs:integer" />
+<xs:element form="qualified" minOccurs="0" name="profile" type="xs:string" />
+<xs:element form="qualified" minOccurs="0" name="bodySigned" type="xs:base64Binary" />
+<xs:element form="qualified" minOccurs="0" name="certBody" type="xs:base64Binary" />
+</xs:sequence>
+</xs:complexType>
+<xs:complexType name="Position">
+<xs:sequence>
+<xs:element form="qualified" name="name" type="xs:string" />
+</xs:sequence>
+</xs:complexType>
+<xs:complexType name="Country">
+<xs:sequence>
+<xs:element form="qualified" name="code" type="xs:string" />
+<xs:element form="qualified" name="name" type="xs:string" />
+</xs:sequence>
+</xs:complexType>
+<xs:complexType name="Person">
+<xs:sequence>
+<xs:element form="qualified" name="lastName" type="xs:string" />
+<xs:element form="qualified" name="firstName" type="xs:string" />
+<xs:element form="qualified" minOccurs="0" name="middleName" type="xs:string" />
+<xs:element form="qualified" minOccurs="0" name="roleId" type="xs:string" />
+<xs:element form="qualified" minOccurs="0" name="birthDate" type="xs:string" />
+<xs:element form="qualified" minOccurs="0" name="idNumber" type="xs:string" />
+<xs:element form="qualified" minOccurs="0" name="idIssuer" type="xs:string" />
+<xs:element form="qualified" minOccurs="0" name="idIssueDate" type="xs:string" />
+<xs:element form="qualified" minOccurs="0" name="iin" type="xs:string" />
+<xs:element form="qualified" minOccurs="0" name="st" type="xs:string" />
+<xs:element form="qualified" minOccurs="0" name="l" type="xs:string" />
+<xs:element form="qualified" minOccurs="0" name="phone" type="xs:string" />
+<xs:element form="qualified" minOccurs="0" name="mobile" type="xs:string" />
+<xs:element form="qualified" minOccurs="0" name="email" type="xs:string" />
+<xs:element form="qualified" minOccurs="0" name="address" type="xs:string" />
+<xs:element form="qualified" minOccurs="0" name="legalData" type="tns:Legal" />
+<xs:element form="qualified" name="noResident" type="xs:boolean" />
+<xs:element form="qualified" minOccurs="0" name="citizenship" type="xs:string" />
+<xs:element form="qualified" minOccurs="0" name="ip" type="xs:boolean" />
+<xs:element form="qualified" minOccurs="0" name="bik" type="xs:string" />
+<xs:element form="qualified" minOccurs="0" name="account" type="xs:string" />
+<xs:element form="qualified" minOccurs="0" name="uid" type="xs:string" />
+<xs:element form="qualified" minOccurs="0" name="password" type="xs:string" />
+<xs:element form="qualified" minOccurs="0" name="isCUser" type="xs:boolean" />
+<xs:element form="qualified" minOccurs="0" name="generatePass" type="xs:boolean" />
+<xs:element form="qualified" minOccurs="0" name="requestCertEmail" type="xs:boolean" />
+</xs:sequence>
+</xs:complexType>
+<xs:complexType name="Legal">
+<xs:sequence>
+<xs:element form="qualified" name="orgName" type="xs:string" />
+<xs:element form="qualified" minOccurs="0" name="certificate" type="xs:string" />
+<xs:element form="qualified" minOccurs="0" name="certificateIssuer" type="xs:string" />
+<xs:element form="qualified" minOccurs="0" name="certificateIssueDate" type="xs:string" />
+<xs:element form="qualified" name="directorSirname" type="xs:string" />
+<xs:element form="qualified" name="directorPosition" type="xs:string" />
+<xs:element form="qualified" name="noResident" type="xs:boolean" />
+<xs:element form="qualified" minOccurs="0" name="country" type="xs:string" />
+<xs:element form="qualified" minOccurs="0" name="bin" type="xs:string" />
+<xs:element form="qualified" minOccurs="0" name="vatin" type="xs:string" />
+<xs:element form="qualified" minOccurs="0" name="iin" type="xs:string" />
+<xs:element form="qualified" minOccurs="0" name="phone" type="xs:string" />
+<xs:element form="qualified" name="address" type="xs:string" />
+<xs:element form="qualified" minOccurs="0" name="joinNumber" type="xs:string" />
+</xs:sequence>
+</xs:complexType>
+<xs:complexType name="PkiDocument">
+<xs:sequence />
+<xs:attribute name="dateTime" type="xs:dateTime" />
+</xs:complexType>
+<xs:complexType name="Tariff">
+<xs:sequence>
+<xs:element form="qualified" name="id" type="xs:integer" />
+<xs:element form="qualified" name="name" type="xs:string" />
+<xs:element form="qualified" name="price" type="xs:decimal" />
+<xs:element form="qualified" maxOccurs="unbounded" name="fxTariffDetails" type="tns:TariffDetail" />
+</xs:sequence>
+</xs:complexType>
+<xs:complexType name="TariffDetail">
+<xs:sequence>
+<xs:element form="qualified" name="id" type="xs:integer" />
+<xs:element form="qualified" minOccurs="0" name="certificate" type="xs:string" />
+<xs:element form="qualified" minOccurs="0" name="certificateInit" type="xs:string" />
+<xs:element form="qualified" name="keySize" type="xs:integer" />
+<xs:element form="qualified" name="isSaveKey" type="xs:boolean" />
+<xs:element form="qualified" minOccurs="0" name="algType" type="tns:algTYPE" />
+</xs:sequence>
+</xs:complexType>
+<xs:complexType name="Organization">
+<xs:sequence>
+<xs:element form="qualified" name="legalData" type="tns:Legal" />
+<xs:element form="qualified" name="isBlocked" type="xs:boolean" />
+<xs:element form="qualified" name="isCertLogin" type="xs:boolean" />
+<xs:element form="qualified" name="isSimpleOrder" type="xs:boolean" />
+<xs:element form="qualified" name="isPreOrder" type="xs:boolean" />
+<xs:element form="qualified" name="isDefaultOrder" type="xs:boolean" />
+<xs:element form="qualified" name="isApproveInit" type="xs:boolean" />
+<xs:element form="qualified" name="isApproveOneReg" type="xs:boolean" />
+<xs:element form="qualified" name="isApproveTwoReg" type="xs:boolean" />
+<xs:element form="qualified" name="isApproveOneRev" type="xs:boolean" />
+<xs:element form="qualified" name="isApproveTwoRev" type="xs:boolean" />
+<xs:element form="qualified" name="isGetTumar" type="xs:boolean" />
+<xs:element form="qualified" name="isGetTumarJce" type="xs:boolean" />
+<xs:element form="qualified" minOccurs="0" name="defaultOrder" type="tns:Order" />
+<xs:element form="qualified" name="createDate" type="xs:date" />
+<xs:element form="qualified" minOccurs="0" name="defaultUser" type="tns:Person" />
+<xs:element form="qualified" maxOccurs="unbounded" minOccurs="0" name="fxOrganizationsApproves" nillable="true" type="tns:ApproveUserTypes" />
+</xs:sequence>
+</xs:complexType>
+<xs:complexType name="Order">
+<xs:sequence>
+<xs:element form="qualified" minOccurs="0" name="id" type="xs:integer" />
+<xs:element form="qualified" minOccurs="0" name="clientId" type="xs:integer" />
+<xs:element form="qualified" minOccurs="0" name="invoiceNum" type="xs:integer" />
+<xs:element form="qualified" minOccurs="0" name="bankId" type="xs:integer" />
+<xs:element form="qualified" minOccurs="0" name="account" type="xs:string" />
+<xs:element form="qualified" minOccurs="0" name="status" type="tns:orderTYPE" />
+<xs:element form="qualified" minOccurs="0" name="payerNumberType" type="xs:string" />
+<xs:element form="qualified" minOccurs="0" name="payerNumber" type="xs:string" />
+<xs:element form="qualified" name="payerName" type="xs:string" />
+<xs:element form="qualified" name="payerAddress" type="xs:string" />
+<xs:element form="qualified" maxOccurs="unbounded" minOccurs="0" name="fxOrderDetails" nillable="true" type="tns:OrderDetail" />
+</xs:sequence>
+</xs:complexType>
+<xs:complexType name="OrderDetail">
+<xs:sequence>
+<xs:element form="qualified" minOccurs="0" name="id" type="xs:integer" />
+<xs:element form="qualified" name="dn" type="xs:string" />
+<xs:element form="qualified" name="tariffId" type="xs:integer" />
+<xs:element form="qualified" name="claimCount" type="xs:integer" />
+</xs:sequence>
+</xs:complexType>
+<xs:complexType name="ApproveUserTypes">
+<xs:sequence>
+<xs:element form="qualified" name="id" type="xs:integer" />
+<xs:element form="qualified" name="name" type="xs:string" />
+<xs:element form="qualified" name="approveLevel" type="xs:short" />
+<xs:element form="qualified" name="requestUserType" type="tns:userTYPE" />
+<xs:element form="qualified" name="confirmUserType" type="tns:userTYPE" />
+<xs:element form="qualified" name="requestType" type="tns:requestTYPE" />
+</xs:sequence>
+</xs:complexType>
+<xs:complexType name="X.509">
+<xs:sequence>
+<xs:element form="qualified" name="serialNumber" type="xs:base64Binary" />
+<xs:element form="qualified" name="body" type="xs:base64Binary" />
+</xs:sequence>
+</xs:complexType>
+<xs:complexType name="Bank">
+<xs:sequence>
+<xs:element form="qualified" name="id" type="xs:integer" />
+<xs:element form="qualified" name="name" type="xs:string" />
+<xs:element form="qualified" name="bik" type="xs:string" />
+<xs:element form="qualified" minOccurs="0" name="address" type="xs:string" />
+<xs:element form="qualified" minOccurs="0" name="description" type="xs:string" />
+<xs:element form="qualified" minOccurs="0" name="branch" type="xs:string" />
+</xs:sequence>
+</xs:complexType>
+<xs:complexType name="Region">
+<xs:sequence>
+<xs:element form="qualified" name="name" type="xs:string" />
+</xs:sequence>
+</xs:complexType>
+<xs:complexType name="Role">
+<xs:sequence>
+<xs:element form="qualified" name="id" type="xs:integer" />
+<xs:element form="qualified" name="name" type="xs:string" />
+<xs:element form="qualified" name="description" type="xs:string" />
+</xs:sequence>
+</xs:complexType>
+<xs:complexType name="City">
+<xs:sequence>
+<xs:element form="qualified" name="name" type="xs:string" />
+<xs:element form="qualified" minOccurs="0" name="region" type="tns:Region" />
+</xs:sequence>
+</xs:complexType>
+<xs:complexType name="Issuer">
+<xs:sequence>
+<xs:element form="qualified" name="name" type="xs:string" />
+</xs:sequence>
+</xs:complexType>
+<xs:simpleType name="codeTYPE">
+<xs:restriction base="xs:string">
+<xs:enumeration value="xsdValidationError" />
+<xs:enumeration value="signError" />
+<xs:enumeration value="serverError" />
+<xs:enumeration value="uniqueError" />
+<xs:enumeration value="entityNotFound" />
+<xs:enumeration value="payError" />
+<xs:enumeration value="incorrectDataError" />
+<xs:enumeration value="commonError" />
+</xs:restriction>
+</xs:simpleType>
+<xs:simpleType name="statusTYPE">
+<xs:restriction base="xs:string">
+<xs:enumeration value="OK" />
+<xs:enumeration value="ERROR" />
+</xs:restriction>
+</xs:simpleType>
+<xs:simpleType name="requestStatusTYPE">
+<xs:restriction base="xs:string">
+<xs:enumeration value="novel" />
+<xs:enumeration value="approved1" />
+<xs:enumeration value="approved2" />
+<xs:enumeration value="rejected" />
+<xs:enumeration value="processed" />
+<xs:enumeration value="error" />
+</xs:restriction>
+</xs:simpleType>
+<xs:simpleType name="requestTYPE">
+<xs:restriction base="xs:string">
+<xs:enumeration value="registration" />
+<xs:enumeration value="initialization" />
+<xs:enumeration value="revocation" />
+</xs:restriction>
+</xs:simpleType>
+<xs:simpleType name="algTYPE">
+<xs:restriction base="xs:string">
+<xs:enumeration value="GOST" />
+<xs:enumeration value="RSA" />
+</xs:restriction>
+</xs:simpleType>
+<xs:simpleType name="orderTYPE">
+<xs:restriction base="xs:string">
+<xs:enumeration value="novel" />
+<xs:enumeration value="invoiced" />
+<xs:enumeration value="confirmed" />
+<xs:enumeration value="paymented" />
+<xs:enumeration value="rejected" />
+<xs:enumeration value="finished" />
+<xs:enumeration value="accounted" />
+</xs:restriction>
+</xs:simpleType>
+<xs:simpleType name="userTYPE">
+<xs:restriction base="xs:string">
+<xs:enumeration value="adminType" />
+<xs:enumeration value="managerType" />
+<xs:enumeration value="clientType" />
+</xs:restriction>
+</xs:simpleType>
+</xs:schema>
+  </wsdl:types>
+  <wsdl:message name="getDocumentXSDResponse">
+    <wsdl:part element="tns:getDocumentXSDResponse" name="parameters">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="getTumarAdditionalResponse">
+    <wsdl:part element="tns:getTumarAdditionalResponse" name="parameters">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="getTypeXSDResponse">
+    <wsdl:part element="tns:getTypeXSDResponse" name="parameters">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="getTypeXSD">
+    <wsdl:part element="tns:getTypeXSD" name="parameters">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="pkiServiceResponse">
+    <wsdl:part element="tns:pkiServiceResponse" name="parameters">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="echoResponse">
+    <wsdl:part element="tns:echoResponse" name="parameters">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="echo">
+    <wsdl:part element="tns:echo" name="parameters">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="getVersionResponse">
+    <wsdl:part element="tns:getVersionResponse" name="parameters">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="pkiService">
+    <wsdl:part element="tns:pkiService" name="parameters">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="getVersion">
+    <wsdl:part element="tns:getVersion" name="parameters">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="getDocumentXSD">
+    <wsdl:part element="tns:getDocumentXSD" name="parameters">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="getTumarAdditional">
+    <wsdl:part element="tns:getTumarAdditional" name="parameters">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:portType name="WebraWS">
+    <wsdl:operation name="echo">
+      <wsdl:input message="tns:echo" name="echo">
+    </wsdl:input>
+      <wsdl:output message="tns:echoResponse" name="echoResponse">
+    </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="getDocumentXSD">
+      <wsdl:input message="tns:getDocumentXSD" name="getDocumentXSD">
+    </wsdl:input>
+      <wsdl:output message="tns:getDocumentXSDResponse" name="getDocumentXSDResponse">
+    </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="pkiService">
+      <wsdl:input message="tns:pkiService" name="pkiService">
+    </wsdl:input>
+      <wsdl:output message="tns:pkiServiceResponse" name="pkiServiceResponse">
+    </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="getTypeXSD">
+      <wsdl:input message="tns:getTypeXSD" name="getTypeXSD">
+    </wsdl:input>
+      <wsdl:output message="tns:getTypeXSDResponse" name="getTypeXSDResponse">
+    </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="getTumarAdditional">
+      <wsdl:input message="tns:getTumarAdditional" name="getTumarAdditional">
+    </wsdl:input>
+      <wsdl:output message="tns:getTumarAdditionalResponse" name="getTumarAdditionalResponse">
+    </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="getVersion">
+      <wsdl:input message="tns:getVersion" name="getVersion">
+    </wsdl:input>
+      <wsdl:output message="tns:getVersionResponse" name="getVersionResponse">
+    </wsdl:output>
+    </wsdl:operation>
+  </wsdl:portType>
+  <wsdl:binding name="WebraWSSoapBinding" type="tns:WebraWS">
+    <soap:binding style="document" transport="http://schemas.xmlsoap.org/soap/http" />
+    <wsdl:operation name="echo">
+      <soap:operation soapAction="" style="document" />
+      <wsdl:input name="echo">
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output name="echoResponse">
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="getDocumentXSD">
+      <soap:operation soapAction="" style="document" />
+      <wsdl:input name="getDocumentXSD">
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output name="getDocumentXSDResponse">
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="pkiService">
+      <soap:operation soapAction="" style="document" />
+      <wsdl:input name="pkiService">
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output name="pkiServiceResponse">
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="getTypeXSD">
+      <soap:operation soapAction="" style="document" />
+      <wsdl:input name="getTypeXSD">
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output name="getTypeXSDResponse">
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="getTumarAdditional">
+      <soap:operation soapAction="" style="document" />
+      <wsdl:input name="getTumarAdditional">
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output name="getTumarAdditionalResponse">
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="getVersion">
+      <soap:operation soapAction="" style="document" />
+      <wsdl:input name="getVersion">
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output name="getVersionResponse">
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:service name="WebraWS">
+    <wsdl:port binding="tns:WebraWSSoapBinding" name="WebraWSPort">
+      <soap:address location="https://betaca.kisc.kz:443/webra/Service" />
+    </wsdl:port>
+  </wsdl:service>
+</wsdl:definitions>

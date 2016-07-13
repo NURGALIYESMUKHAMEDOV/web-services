@@ -1,0 +1,48 @@
+Revision: 3964
+1. Добавлены новые поля <country></country> в юридических данных и <citizenship></citizenship>  в физических данных.
+2. Добавлено новое поле "Идентификационный номер VAT (НДС)" <vatin></vatin> в юридической части.
+3. Актуализирован документ «Спецификации web-сервиса WReg WS»
+4. Добавлены поля в методе createPerson
+        <isCUser></isCUser> - Флаг CMP пользователя;
+        <generatePass></generatePass> - флаг для генерации логина и пароля на стороне WReg
+        <requestCertEmail></requestCertEmail> - флаг отправки уведомления о необходимости выпуска сертификата после регистрации пользователя
+5. Поля <bik></bik> и <account></account> юридических лиц в Организации УЦ по схеме постоплаты не передаются.
+6. Разработан метод removePerson удаления записи пользователя.
+7. Доработано формирование DN сервисами в соответствии с настройками шаблонов DN Организации УЦ на WReg.
+8. Невозможен ввод города <st></st> и области <l></l> по отдельности.
+9. Реализована проверка на наличие вводимых значений в <idIssuer></idIssuer>, <certificateIssuer></certificateIssuer>, <directorPosition></directorPosition> со справочниками должностей и нормативно-правовых учреждений.
+10. Обязательность полей регистрационных форм WReg (WS)
+В реквизитах физического лица:
+Если в поле <iin></iin> имеются данные, поля
+        <idNumber></idNumber>
+        <idIssuer></idIssuer>
+        <idIssueDate></idIssueDate>
+        <citizenship></citizenship>
+необязательны.
+В реквизитах юридического лица:
+Если нерезидент, поля
+        <certificate></certificate>
+        <certificateIssuer></certificateIssuer>
+        <certificateIssueDate></certificateIssueDate>
+        <ip></ip>
+        <bin></bin>
+необязательны.
+Если нерезидент и в поле <bin></bin> имеются валидные данные, поля
+        <country></country>
+        <vatin></vatin>
+        <certificate></certificate>
+        <certificateIssuer></certificateIssuer>
+        <certificateIssueDate></certificateIssueDate>
+        <ip></ip>
+необязательны.
+Если резидент, поля
+	<country></country>
+	<vatin></vatin>
+необязательны.
+Если резидент и присутствует признак ИП, то поле <bin></bin> необязательно.
+Если резидент и в поле <bin></bin> имеются валидные данные, то поля
+        <certificate></certificate>
+        <certificateIssuer></certificateIssuer>
+        <certificateIssueDate></certificateIssueDate>
+        <ip></ip>
+необязательны.

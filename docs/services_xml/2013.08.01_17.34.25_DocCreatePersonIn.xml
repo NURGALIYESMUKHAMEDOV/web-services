@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<docCreatePersonIn xmlns="http://www.gamma.kz/webra/xsd" dateTime="2001-12-17T09:30:47Z">
+    <person>
+        <lastName>adissddniz</lastName>
+        <firstName>firstname</firstName>
+        <middleName>middlename</middleName>
+        <roleId>4</roleId>
+        <birthDate>28.02.1988</birthDate>
+        <idNumber>100006627</idNumber>
+        <idIssuer>МЮ РК</idIssuer>
+        <idIssueDate>28.08.2004</idIssueDate>
+        <iin>760601400209</iin>
+        <st></st>
+        <l></l>
+        <phone>123</phone>
+        <mobile>123</mobile>
+        <email>tesu@test.com</email>
+        <address>a</address>
+        <legalData>
+            <orgName>"Beeline, "</orgName>
+            <certificate>3456345649</certificate>
+            <certificateIssuer>kziim</certificateIssuer>
+            <certificateIssueDate>12.08.2003</certificateIssueDate>
+            <directorSirname>a</directorSirname>
+            <directorPosition>a</directorPosition>
+            <noResident>true</noResident>
+            <country>TR</country>
+            <bin>100460000102</bin>
+            <vatin>324</vatin>
+            <iin>123456789000</iin>
+            <phone>123</phone>
+            <address>a</address>
+        </legalData>
+        <noResident>true</noResident>
+        <citizenship>TR</citizenship>
+        <ip>false</ip>
+        <bik>CASPKZKA</bik>
+        <account>12341234123412341234</account>
+        <isCUser>false</isCUser>
+        <generatePass>false</generatePass>
+        <requestCertEmail>false</requestCertEmail>
+    </person>
+    <login>«»№!"d#$%</login>
+    <password>1q2w#E$R"#$%'()*+,-./:;=</password>
+</docCreatePersonIn>
